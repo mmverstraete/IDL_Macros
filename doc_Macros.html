@@ -1,0 +1,1103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <title>Documentation for the IDL routines in project Macros</title>
+   </head>
+<body>
+<h1>Documentation for the IDL routines in project Macros</h1>
+<h2>is_alphanum</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is either <code>STRING</code> (7) or one of the numeric types: <code>BYTE</code> (1), <code>INT</code> (2), <code>LONG</code> (3), <code>FLOAT</code> (4), <code>DOUBLE</code> (5), <code>COMPLEX</code> (6), <code>DCOMPLEX</code> (9), <code>UINT</code> (12), <code>ULONG</code> (13), <code>LONG64</code> (14) or <code>ULONG64</code> (15), and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_alphanum(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if the type of <code>arg</code> is alphanumeric, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, is_alphanum(&#39;Hi&#39;)
+       1
+
+IDL&gt; PRINT, is_alphanum(1.2)
+       1
+
+IDL&gt; PRINT, is_alphanum(PTR_NEW(0b))
+       0
+
+IDL&gt; PRINT, is_alphanum()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_array</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if argument <code>arg</code> is a defined array (i.e., has at least one dimension), and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_array(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is a defined array, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, is_array([1, 2, 3])
+       1
+
+IDL&gt; PRINT, is_array([&#39;abc&#39;, &#39;def&#39;])
+       1
+
+IDL&gt; PRINT, is_array(3)
+       0
+
+IDL&gt; PRINT, is_array()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_byte</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>BYTE</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_byte(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>BYTE</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>BYTE</code> variable represents an unsigned 8-bit integer number, which can take values between 0 and 255, but small integers in that range are not characterized as bytes, unless explicitly stated: the default type for integers is a 16-bit <code>INT</code>.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>ASCII</code> context, there is a direct relation between integers in the range 0 to 255 and corresponding character representations, but these are not interchangeable in <code>IDL</code>. See the following examples.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 72B
+IDL&gt; res = is_byte(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = STRING(a)
+IDL&gt; PRINT, b
+H
+IDL&gt; res = is_byte(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, BYTE(&#39;H&#39;)
+  72
+IDL&gt; c = 72
+IDL&gt; res = is_byte(c)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_byte()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_complex</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>COMPLEX</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_complex(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns 1 if <code>arg</code> is of type <code>COMPLEX</code>, and 0 otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a variable of type <code>COMPLEX</code> is represented as a couple of real numbers, but an array of two real numbers is not considered a complex number.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = COMPLEX(1.0, 2.0)
+IDL&gt; res = is_complex(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = [12.3, 45.6]
+IDL&gt; res = is_complex(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; res = is_complex(&#39;test&#39;)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_complex()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_dcomplex</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>DCOMPLEX</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_dcomplex(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>DCOMPLEX</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a variable of type <code>DCOMPLEX</code> is represented as a couple of double precision real numbers, but an array of two double precision real numbers is not considered a complex number.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; c = DCOMPLEX(3.0, 4.0)
+IDL&gt; res = is_dcomplex(c)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; res = is_dcomplex([12.3, 45.6])
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_dcomplex()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_defined</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if argument <code>arg</code> is defined (as opposed to <code>UNDEFINED</code> (Type 0)), and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_defined(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is defined, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = [1, 2, 3]
+IDL&gt; res = is_defined(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = !NULL
+IDL&gt; res = is_defined(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_defined()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_double</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>DOUBLE</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_double(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>DOUBLE</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>DOUBLE</code> variable represents a double precision floating point number, which can take values within a range that is hardware-dependent. The <code>IDL</code> function <code>MACHAR(/DOUBLE)</code> reports the extent of this range, for instance <code>[2.2E-308, 2.0E+308]</code> for a 64-bit machine, where the mantissa will feature at least 15 and no more than 16 significant digits.</p></li>
+<li><p><strong>Note 3:</strong> A <code>DCOMPLEX</code> variable is not considered of type <code>DOUBLE</code>. However, both the real and the imaginary components, taken individually, are of type <code>DOUBLE</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 3.14159D
+IDL&gt; res = is_double(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = DCOMPLEX(12.3, 4.56)
+IDL&gt; res = is_double(b)
+IDL&gt; PRINT, res
+       0
+IDL&gt; res = is_double(IMAGINARY(b))
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; PRINT, is_double()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_float</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>FLOAT</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_float(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>FLOAT</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>FLOAT</code> variable represents a single precision floating point number, which can take values within a range that is hardware-dependent. The <code>IDL</code> function <code>MACHAR()</code> reports the extent of this range, for instance <code>[1.2E-38, 3.4E+38]</code> for a 64-bit machine, where the mantissa will feature at least 6 and no more than 7 significant digits.</p></li>
+<li><p><strong>Note 3:</strong> If a real number with more than 7 significant digits is assigned to a variable without specifying that it should be saved in double precision, the variable will contain a truncated representation of that number, and thus be considered of type <code>FLOAT</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 1.23
+IDL&gt; res = is_float(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = 5
+IDL&gt; res = is_float(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; c = 1.23456789
+IDL&gt; res = is_float(c)
+IDL&gt; PRINT, res
+       1
+IDL&gt; PRINT, c
+      1.23457
+
+IDL&gt; PRINT, is_float()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_int</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>INT</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_int(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>INT</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, an <code>INT</code> variable represents a signed 16-bit integer number, which can take values between <span class="math inline">&#8722;32,&#8198;768</span> and <span class="math inline">+32,&#8198;767</span>. Natural numbers beyond this range can be used, but need to be declared as <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code> or <code>ULONG64</code>.</p></li>
+<li><p><strong>Note 3:</strong> Note the strict interpretation of the type <code>INT</code>. See the function <code>is_integer</code> for a generic test allowing any one of the <code>INTEGER</code> types.</p></li>
+<li><p><strong>Note 4:</strong> Contrary to the case of floating point numbers (see subsection [subsec:isfloat] above), if an integer constant larger than <span class="math inline">+32,&#8198;767</span> is assigned to a variable, the latter becomes a long integer.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 10
+IDL&gt; res = is_int(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = 1.23
+IDL&gt; res = is_int(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; c = 40000
+IDL&gt; res = is_int(c)
+IDL&gt; PRINT, res
+       0
+IDL&gt; PRINT, is_long(c)
+       1
+
+IDL&gt; PRINT, is_INT()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_integer</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>INT</code>, <code>UINT</code>, <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code>, or <code>ULONG64</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_integer(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>INT</code>, <code>UINT</code>, <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code>, or <code>ULONG64</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, an <code>INTEGER</code> variable represents a signed 16-bit integer number, which can take values between <span class="math inline">&#8722;32,&#8198;768</span> and <span class="math inline">+32,&#8198;767</span>. Natural numbers beyond this range can be used, but need to be declared as <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code> or <code>ULONG64</code>.</p></li>
+<li><p><strong>Note 3:</strong> Note the more permissive interpretation of type <code>INTEGER</code>, which returns a positive answer for any one of the 6 types of integer numbers allowed in <code>IDL</code>.</p></li>
+<li><p><strong>Note 4:</strong> Contrary to the case of floating point numbers, if an integer constant larger than <span class="math inline">+32,&#8198;767</span> is assigned to a variable, the latter becomes a long integer.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 10
+IDL&gt; res = is_integer(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = 1.23
+IDL&gt; res = is_integer(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; c = 40000
+IDL&gt; PRINT, is_integer(c)
+       1
+IDL&gt; PRINT, is_int(c)
+       0
+IDL&gt; PRINT, is_long(c)
+       1
+
+IDL&gt; d = -9223372036854LL
+IDL&gt; res = is_integer(d)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; PRINT, is_integer()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_long</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>LONG</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_long(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>LONG</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>LONG</code> variable represents a signed 32-bit integer number, which can take values between <span class="math inline">&#8722;2,&#8198;147,&#8198;483,&#8198;648</span> and<br />
+<span class="math inline">+2,&#8198;147,&#8198;483,&#8198;647</span>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 123456789L
+IDL&gt; res = is_long(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = 12
+IDL&gt; res = is_long(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_long()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_long64</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>LONG64</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_long64(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>LONG64</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>LONG</code> variable represents a signed 64-bit integer number, which can take values between<br />
+<span class="math inline">&#8722;9,&#8198;223,&#8198;372,&#8198;036,&#8198;854,&#8198;775,&#8198;808</span> and <span class="math inline">+9,&#8198;223,&#8198;372,&#8198;036,&#8198;854,&#8198;775,&#8198;807</span>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, is_long64(123LL)
+       1
+
+IDL&gt; PRINT, is_long64(123456UL)
+       0
+
+IDL&gt; PRINT, is_long64()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_numeric</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is numeric, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_numeric(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of one of the numeric types, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; .reset
+IDL&gt; PRINT, is_numeric(zzz)
+       0
+
+IDL&gt; a = 12B
+IDL&gt; res = is_numeric(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = &#39;Hello&#39;
+IDL&gt; res = is_numeric(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; c = 12.3
+IDL&gt; res = is_numeric(c)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; PRINT, is_numeric()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_objref</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>OBJREF</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_objref(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>OBJREF</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; A = OBJARR(3, 3)
+IDL&gt; res = is_objref(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = 1.23
+IDL&gt; res = is_objref(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_objref()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_pointer</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>POINTER</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_pointer(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>POINTER</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 12.3
+IDL&gt; b = PTR_NEW(TEMPORARY(a))
+IDL&gt; res = is_pointer(b)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; c = 1234UL
+IDL&gt; res = is_pointer(c)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_pointer()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_positive</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if argument <code>arg</code> is of numeric type and equal to or greater than <code>0.0</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function tests whether the argument <code>arg</code> is of a numeric type, and if so, whether it is equal to or greater than <code>0.0</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_positive(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary numeric expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is both of numeric type and equal or larger than <code>0</code>, and returns <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> This function considers complex numbers to be always positive, independently from the sign of the real and imaginary parts.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, is_positive(1234)
+       1
+
+IDL&gt; PRINT, is_positive(0.0)
+       1
+
+IDL&gt; PRINT, is_positive(-0.1E-20)
+       0
+
+IDL&gt; PRINT, is_positive(&#39;12&#39;)
+       0
+
+IDL&gt; print, is_positive(COMPLEX(-1.0, 0.0))
+       1
+
+IDL&gt; print, is_positive(COMPLEX(1.0, -20.0))
+       1
+
+IDL&gt; print, is_positive(COMPLEX(-1.0, -20.0))
+       1
+
+IDL&gt; PRINT, is_positive()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_scalar</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if argument <code>arg</code> is a defined scalar (i.e., does not have a dimension), and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_scalar(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is a scalar, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 3.14
+IDL&gt; res = is_scalar(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = [5, 6, 7]
+IDL&gt; res = is_scalar(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; c = CREATE_STRUCT(&#39;A&#39;, 1, &#39;B&#39;, &#39;xxx&#39;)
+IDL&gt; res = is_scalar(c)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_scalar()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_single</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of argument <code>arg</code> refers to a single precision number (i.e., <code>BYTE</code> (1), <code>INT</code> (2), <code>LONG</code> (3), <code>FLOAT</code> (4), <code>COMPLEX</code> (6), <code>UINT</code> (12), <code>ULONG</code> (13), <code>LONG64</code> (14) or <code>ULONG64</code> (15)), and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_single(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>BYTE</code> (1), <code>INT</code> (2), <code>LONG</code> (3), <code>FLOAT</code> (4), <code>COMPLEX</code> (6), <code>UINT</code> (12), <code>ULONG</code> (13), <code>LONG64</code> (14) or <code>ULONG64</code> (15), and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, is_single(2)
+       1
+
+IDL&gt; PRINT, is_single(5B)
+       1
+
+IDL&gt; PRINT, is_single(COMPLEX(3.5, 1.0))
+       1
+
+IDL&gt; PRINT, is_single(DOUBLE(78.0))
+       0
+
+IDL&gt; PRINT, is_single()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_string</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>STRING</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_string(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code> [or N/A].</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>STRING</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> This function does not distinguish between scalar and array values for this purpose.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = &#39;Hello&#39;
+IDL&gt; res = is_string(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = 12.34
+IDL&gt; res = is_string(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; c = [&#39;Hello&#39;, &#39;World&#39;]
+IDL&gt; res = is_string(c)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; PRINT, is_string()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_struct</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>STRUCT</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_struct(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>STRUCT</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = CREATE_STRUCT(&#39;A&#39;, 1, &#39;B&#39;, &#39;xxx&#39;)
+IDL&gt; res = is_struct(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = 12.3D
+IDL&gt; res = is_struct(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_struct()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_uint</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>UINT</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_uint(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>UINT</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>UINT</code> variable represents an unsigned 16-bit integer number, which can take values between <span class="math inline">0</span> and <span class="math inline">65,&#8198;535</span>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, is_uint(123U)
+       1
+
+IDL&gt; PRINT, is_uint(123)
+       0
+
+IDL&gt; PRINT, is_uint()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_ulong</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>ULONG</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_ulong(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>ULONG</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>ULONG</code> variable represents an unsigned 32-bit integer number, which can take values between <span class="math inline">0</span> and <span class="math inline">4,&#8198;294,&#8198;967,&#8198;296</span>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, is_ulong(123456789UL)
+       1
+
+IDL&gt; PRINT, is_ulong(12L)
+       0
+
+IDL&gt; PRINT, is_ulong()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_ulong64</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>ULONG64</code>, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_ulong64(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>ULONG64</code>, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>ULONG64</code> variable represents an unsigned 64-bit integer number, which can take values between <span class="math inline">0</span> and<br />
+<span class="math inline">18,&#8198;446,&#8198;744,&#8198;073,&#8198;709,&#8198;551,&#8198;615</span>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 1234567890ULL
+IDL&gt; res = is_ulong64(a)
+IDL&gt; PRINT, res
+       1
+
+IDL&gt; b = 1234567890LL
+IDL&gt; res = is_ulong64(b)
+IDL&gt; PRINT, res
+       0
+
+IDL&gt; PRINT, is_ulong64()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>set_white</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function does not accept any input arguments and returns a string containing two characters: a <code>TAB</code> and a <code>SPACE</code>.</p></li>
+<li><p><strong>Algorithm:</strong> This function returns a 2-character <code>STRING</code> containing a <code>TAB</code> and a <code>SPACE</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>white = set_white()</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>STRING</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns a 2-character <code>STRING</code> containing a <code>TAB</code> and a <code>SPACE</code>.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This may be useful to split a string on white space when the nature of the apparent white space is unknown, or when both characters may appear in the same string.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; line = &#39;This line contains a TAB&#39; + STRING(9B) + $
+   &#39;character.&#39;
+IDL&gt; PRINT, line
+This line contains a TAB    character.
+IDL&gt; white = set_white()
+IDL&gt; parts = STRSPLIT(line, white, COUNT = n_parts, /EXTRACT)
+IDL&gt; PRINT, &#39;n_parts = &#39;, n_parts
+n_parts =            6
+IDL&gt; FOR i = 0, n_parts-1 DO PRINT, i, &#39;   &gt;&#39; + parts[i] + &#39;&lt;&#39;
+       0   &gt;This&lt;
+       1   &gt;line&lt;
+       2   &gt;contains&lt;
+       3   &gt;a&lt;
+       4   &gt;TAB&lt;
+       5   &gt;character.&lt;</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>type_of</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>0</code> and reports on the type of input argument <code>arg</code> in the 2 output arguments <code>type_code</code> and <code>type_name</code>.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>rc = type_of(arg, type_code, type_name)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+<li><p><code>type_code {INTEGER} [O]:</code> The type code of the input argument <code>arg</code>.</p></li>
+<li><p><code>type_name {STRING} [O]:</code> The type name of the input argument <code>arg</code>.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>0</code> and reports on the type of input argument <code>arg</code> in the 2 output arguments <code>type_code</code> and <code>type_name</code>.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = 36B
+IDL&gt; rc = type_of(a, type_code, type_name)
+IDL&gt; PRINT, type_code, &#39;   &#39;, type_name
+           1   BYTE
+
+IDL&gt; b = 987.32
+IDL&gt; rc = type_of(b, type_code, type_name)
+IDL&gt; PRINT, type_code, &#39;   &#39;, type_name
+           4   FLOAT
+
+IDL&gt; c = &#39;Hello World!&#39;
+IDL&gt; rc = type_of(c, type_code, type_name)
+IDL&gt; PRINT, type_code, &#39;   &#39;, type_name
+           7   STRING
+
+IDL&gt; PRINT, type_of()
+       0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+</body>
+</html>
