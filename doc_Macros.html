@@ -375,9 +375,9 @@ IDL&gt; PRINT, is_float()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, an <code>INT</code> variable represents a signed 16-bit integer number, which can take values between <span class="math inline">&#8722;32,&#8198;768</span> and <span class="math inline">+32,&#8198;767</span>. Natural numbers beyond this range can be used, but need to be declared as <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code> or <code>ULONG64</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, an <code>INT</code> variable represents a signed 16-bit integer number, which can take values between <span class="math inline">&#8197;&#8722;&#8197;32,&#8198;768</span> and <span class="math inline">&#8197;+&#8197;32,&#8198;767</span>. Natural numbers beyond this range can be used, but need to be declared as <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code> or <code>ULONG64</code>.</p></li>
 <li><p><strong>Note 3:</strong> Note the strict interpretation of the type <code>INT</code>. See the function <code>is_integer</code> for a generic test allowing any one of the <code>INTEGER</code> types.</p></li>
-<li><p><strong>Note 4:</strong> Contrary to the case of floating point numbers (see subsection [subsec:isfloat] above), if an integer constant larger than <span class="math inline">+32,&#8198;767</span> is assigned to a variable, the latter becomes a long integer.</p></li>
+<li><p><strong>Note 4:</strong> Contrary to the case of floating point numbers (see subsection <a href="#subsec:isfloat" data-reference-type="ref" data-reference="subsec:isfloat">[subsec:isfloat]</a> above), if an integer constant larger than <span class="math inline">&#8197;+&#8197;32,&#8198;767</span> is assigned to a variable, the latter becomes a long integer.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 10
@@ -425,9 +425,9 @@ IDL&gt; PRINT, is_INT()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, an <code>INTEGER</code> variable represents a signed 16-bit integer number, which can take values between <span class="math inline">&#8722;32,&#8198;768</span> and <span class="math inline">+32,&#8198;767</span>. Natural numbers beyond this range can be used, but need to be declared as <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code> or <code>ULONG64</code>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, an <code>INTEGER</code> variable represents a signed 16-bit integer number, which can take values between <span class="math inline">&#8197;&#8722;&#8197;32,&#8198;768</span> and <span class="math inline">&#8197;+&#8197;32,&#8198;767</span>. Natural numbers beyond this range can be used, but need to be declared as <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code> or <code>ULONG64</code>.</p></li>
 <li><p><strong>Note 3:</strong> Note the more permissive interpretation of type <code>INTEGER</code>, which returns a positive answer for any one of the 6 types of integer numbers allowed in <code>IDL</code>.</p></li>
-<li><p><strong>Note 4:</strong> Contrary to the case of floating point numbers, if an integer constant larger than <span class="math inline">+32,&#8198;767</span> is assigned to a variable, the latter becomes a long integer.</p></li>
+<li><p><strong>Note 4:</strong> Contrary to the case of floating point numbers, if an integer constant larger than <span class="math inline">&#8197;+&#8197;32,&#8198;767</span> is assigned to a variable, the latter becomes a long integer.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 10
@@ -481,8 +481,8 @@ IDL&gt; PRINT, is_integer()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>LONG</code> variable represents a signed 32-bit integer number, which can take values between <span class="math inline">&#8722;2,&#8198;147,&#8198;483,&#8198;648</span> and<br />
-<span class="math inline">+2,&#8198;147,&#8198;483,&#8198;647</span>.</p></li>
+<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>LONG</code> variable represents a signed 32-bit integer number, which can take values between <span class="math inline">&#8197;&#8722;&#8197;2,&#8198;147,&#8198;483,&#8198;648</span> and<br />
+<span class="math inline">&#8197;+&#8197;2,&#8198;147,&#8198;483,&#8198;647</span>.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 123456789L
@@ -524,7 +524,7 @@ IDL&gt; PRINT, is_long()
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
 <li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>LONG</code> variable represents a signed 64-bit integer number, which can take values between<br />
-<span class="math inline">&#8722;9,&#8198;223,&#8198;372,&#8198;036,&#8198;854,&#8198;775,&#8198;808</span> and <span class="math inline">+9,&#8198;223,&#8198;372,&#8198;036,&#8198;854,&#8198;775,&#8198;807</span>.</p></li>
+<span class="math inline">&#8197;&#8722;&#8197;9,&#8198;223,&#8198;372,&#8198;036,&#8198;854,&#8198;775,&#8198;808</span> and <span class="math inline">&#8197;+&#8197;9,&#8198;223,&#8198;372,&#8198;036,&#8198;854,&#8198;775,&#8198;807</span>.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_long64(123LL)
@@ -588,6 +588,45 @@ IDL&gt; PRINT, is_numeric()
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+</ul></li>
+</ul>
+<h2>is_numstring</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns <code>1</code> if the type of <code>arg</code> is <code>STRING</code> and all characters of that string are digits (0 to 9), or the <code>+</code> or <code>-</code> signs, or the decimal point, and <code>0</code> otherwise.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code> to determine whether the argument is a STRING, and then check that each and every character in that string is a digit, or a sign, or the decimal point.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_numstring(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>STRING</code> and each character of that string is either a digit, or a sign, or a decimal point, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input argument, including no argument at all, in which case it returns <code>0</code>.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; a = &#39;123&#39;
+IDL&gt; PRINT, is_numstring(a)
+       1
+
+IDL&gt; b = &#39;2*4/3&#39;
+IDL&gt; PRINT, is_numstring(b)
+       0
+
+IDL&gt; c = &#39;-567.89&#39;
+IDL&gt; PRINT, is_numstring(c)
+       1</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2018&#8211;08&#8211;07: Version 0.9 &#8212; Initial release.</p></li>
 </ul></li>
 </ul>
 <h2>is_objref</h2>
@@ -820,7 +859,7 @@ IDL&gt; PRINT, is_single()
 <li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
 </ul></li>
 <li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
-<li><p><strong>Returned value type:</strong> <code>INTEGER</code> [or N/A].</p></li>
+<li><p><strong>Returned value type:</strong> <code>INTEGER</code>.</p></li>
 <li><p><strong>Outcome:</strong></p>
 <ul>
 <li><p>This function returns <code>1</code> if <code>arg</code> is of type <code>STRING</code>, and <code>0</code> otherwise.</p></li>

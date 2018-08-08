@@ -55,12 +55,10 @@ FUNCTION is_ulong64, arg
    ;  VERSIONING:
    ;
    ;  *   2017–11–20: Version 1.0 — Initial public release.
-   ;
-   ;
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
-   ;  *   Copyright (C) 2017 Michel M. Verstraete.
+   ;  *   Copyright (C) 2017-2018 Michel M. Verstraete.
    ;
    ;      Permission is hereby granted, free of charge, to any person
    ;      obtaining a copy of this software and associated documentation
@@ -89,8 +87,6 @@ FUNCTION is_ulong64, arg
    ;
    ;      Please send comments and suggestions to the author at
    ;      MMVerstraete@gmail.com.
-   ;
-   ;
    ;Sec-Cod
    ;  Assess whether the argument 'arg' is of type ULONG64:
    IF (SIZE(arg, /TYPE) EQ 15) THEN RETURN, 1 ELSE RETURN, 0

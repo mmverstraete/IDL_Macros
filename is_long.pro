@@ -31,8 +31,8 @@ FUNCTION is_long, arg
    ;
    ;  *   NOTE 2: Within the IDL context, a LONG variable represents a
    ;      signed 32-bit integer number, which can take values between
-   ;      −2, 147, 483, 648 and
-   ;      +2, 147, 483, 647.
+   ;       − 2, 147, 483, 648 and
+   ;       + 2, 147, 483, 647.
    ;
    ;  EXAMPLES:
    ;
@@ -54,12 +54,10 @@ FUNCTION is_long, arg
    ;  VERSIONING:
    ;
    ;  *   2017–11–20: Version 1.0 — Initial public release.
-   ;
-   ;
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
-   ;  *   Copyright (C) 2017 Michel M. Verstraete.
+   ;  *   Copyright (C) 2017-2018 Michel M. Verstraete.
    ;
    ;      Permission is hereby granted, free of charge, to any person
    ;      obtaining a copy of this software and associated documentation
@@ -88,8 +86,6 @@ FUNCTION is_long, arg
    ;
    ;      Please send comments and suggestions to the author at
    ;      MMVerstraete@gmail.com.
-   ;
-   ;
    ;Sec-Cod
    ;  Assess whether the argument 'arg' is of type LONG:
    IF (SIZE(arg, /TYPE) EQ 3) THEN RETURN, 1 ELSE RETURN, 0

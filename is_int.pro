@@ -31,8 +31,9 @@ FUNCTION is_int, arg
    ;
    ;  *   NOTE 2: Within the IDL context, an INT variable represents a
    ;      signed 16-bit integer number, which can take values between
-   ;      −32, 768 and +32, 767. Natural numbers beyond this range can be
-   ;      used, but need to be declared as LONG, ULONG, LONG64 or ULONG64.
+   ;       − 32, 768 and  + 32, 767. Natural numbers beyond this range can
+   ;      be used, but need to be declared as LONG, ULONG, LONG64 or
+   ;      ULONG64.
    ;
    ;  *   NOTE 3: Note the strict interpretation of the type INT. See the
    ;      function is_integer for a generic test allowing any one of the
@@ -40,7 +41,7 @@ FUNCTION is_int, arg
    ;
    ;  *   NOTE 4: Contrary to the case of floating point numbers (see
    ;      subsection [subsec:isfloat] above), if an integer constant
-   ;      larger than +32, 767 is assigned to a variable, the latter
+   ;      larger than  + 32, 767 is assigned to a variable, the latter
    ;      becomes a long integer.
    ;
    ;  EXAMPLES:
@@ -70,12 +71,10 @@ FUNCTION is_int, arg
    ;  VERSIONING:
    ;
    ;  *   2017–11–20: Version 1.0 — Initial public release.
-   ;
-   ;
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
-   ;  *   Copyright (C) 2017 Michel M. Verstraete.
+   ;  *   Copyright (C) 2017-2018 Michel M. Verstraete.
    ;
    ;      Permission is hereby granted, free of charge, to any person
    ;      obtaining a copy of this software and associated documentation
@@ -104,8 +103,6 @@ FUNCTION is_int, arg
    ;
    ;      Please send comments and suggestions to the author at
    ;      MMVerstraete@gmail.com.
-   ;
-   ;
    ;Sec-Cod
    ;  Assess whether the argument 'arg' is of type INT:
    IF (SIZE(arg, /TYPE) EQ 2) THEN RETURN, 1 ELSE RETURN, 0

@@ -1,12 +1,16 @@
-FUNCTION is_float, arg
+FUNCTION is_numstring, arg
 
    ;Sec-Doc
-   ;  PURPOSE: This function returns 1 if the type of arg is FLOAT, and 0
-   ;  otherwise.
+   ;  PURPOSE: This function returns 1 if the type of arg is STRING and
+   ;  all characters of that string are digits (0 to 9), or the + or -
+   ;  signs, or the decimal point, and 0 otherwise.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE().
+   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
+   ;  to determine whether the argument is a STRING, and then check that
+   ;  each and every character in that string is a digit, or a sign, or
+   ;  the decimal point.
    ;
-   ;  SYNTAX: res = is_float(arg)
+   ;  SYNTAX: res = is_numstring(arg)
    ;
    ;  POSITIONAL PARAMETERS [INPUT/OUTPUT]:
    ;
@@ -18,8 +22,9 @@ FUNCTION is_float, arg
    ;
    ;  OUTCOME:
    ;
-   ;  *   This function returns 1 if arg is of type FLOAT, and 0
-   ;      otherwise.
+   ;  *   This function returns 1 if arg is of type STRING and each
+   ;      character of that string is either a digit, or a sign, or a
+   ;      decimal point, and 0 otherwise.
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
@@ -30,46 +35,25 @@ FUNCTION is_float, arg
    ;  *   NOTE 1: This function accepts any type of input argument,
    ;      including no argument at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a FLOAT variable represents a
-   ;      single precision floating point number, which can take values
-   ;      within a range that is hardware-dependent. The IDL function
-   ;      MACHAR() reports the extent of this range, for instance
-   ;      [1.2E-38, 3.4E+38] for a 64-bit machine, where the mantissa will
-   ;      feature at least 6 and no more than 7 significant digits.
-   ;
-   ;  *   NOTE 3: If a real number with more than 7 significant digits is
-   ;      assigned to a variable without specifying that it should be
-   ;      saved in double precision, the variable will contain a truncated
-   ;      representation of that number, and thus be considered of type
-   ;      FLOAT.
-   ;
    ;  EXAMPLES:
    ;
-   ;      IDL> a = 1.23
-   ;      IDL> res = is_float(a)
-   ;      IDL> PRINT, res
+   ;      IDL> a = '123'
+   ;      IDL> PRINT, is_numstring(a)
    ;             1
    ;
-   ;      IDL> b = 5
-   ;      IDL> res = is_float(b)
-   ;      IDL> PRINT, res
+   ;      IDL> b = '2*4/3'
+   ;      IDL> PRINT, is_numstring(b)
    ;             0
    ;
-   ;      IDL> c = 1.23456789
-   ;      IDL> res = is_float(c)
-   ;      IDL> PRINT, res
+   ;      IDL> c = '-567.89'
+   ;      IDL> PRINT, is_numstring(c)
    ;             1
-   ;      IDL> PRINT, c
-   ;            1.23457
-   ;
-   ;      IDL> PRINT, is_float()
-   ;             0
    ;
    ;  REFERENCES: None.
    ;
    ;  VERSIONING:
    ;
-   ;  *   2017–11–20: Version 1.0 — Initial public release.
+   ;  *   2018–08–07: Version 0.9 — Initial release.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
@@ -103,7 +87,16 @@ FUNCTION is_float, arg
    ;      Please send comments and suggestions to the author at
    ;      MMVerstraete@gmail.com.
    ;Sec-Cod
-   ;  Assess whether the argument 'arg' is of type FLOAT:
-   IF (SIZE(arg, /TYPE) EQ 4) THEN RETURN, 1 ELSE RETURN, 0
+
+   IF (SIZE(arg, /TYPE) EQ 7) THEN BEGIN
+      arglen = STRLEN(arg)
+      FOR i = 0, arglen - 1 DO BEGIN
+         char = STRMID(arg, i, 1)
+         idx = WHERE(char EQ ['0', '1', '2', '3', '4', '5', $
+            '6', '7', '8', '9', '+', '-', '.'], count)
+         IF (count NE 1) THEN RETURN, 0
+      ENDFOR
+      RETURN, 1
+   ENDIF ELSE RETURN, 0
 
 END

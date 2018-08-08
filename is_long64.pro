@@ -32,8 +32,8 @@ FUNCTION is_long64, arg
    ;
    ;  *   NOTE 2: Within the IDL context, a LONG variable represents a
    ;      signed 64-bit integer number, which can take values between
-   ;      −9, 223, 372, 036, 854, 775, 808 and
-   ;      +9, 223, 372, 036, 854, 775, 807.
+   ;       − 9, 223, 372, 036, 854, 775, 808 and
+   ;       + 9, 223, 372, 036, 854, 775, 807.
    ;
    ;  EXAMPLES:
    ;
@@ -51,12 +51,10 @@ FUNCTION is_long64, arg
    ;  VERSIONING:
    ;
    ;  *   2017–11–20: Version 1.0 — Initial public release.
-   ;
-   ;
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
-   ;  *   Copyright (C) 2017 Michel M. Verstraete.
+   ;  *   Copyright (C) 2017-2018 Michel M. Verstraete.
    ;
    ;      Permission is hereby granted, free of charge, to any person
    ;      obtaining a copy of this software and associated documentation
@@ -85,8 +83,6 @@ FUNCTION is_long64, arg
    ;
    ;      Please send comments and suggestions to the author at
    ;      MMVerstraete@gmail.com.
-   ;
-   ;
    ;Sec-Cod
    ;  Assess whether the argument 'arg' is of type LONG64:
    IF (SIZE(arg, /TYPE) EQ 14) THEN RETURN, 1 ELSE RETURN, 0
