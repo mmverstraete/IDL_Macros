@@ -1,18 +1,19 @@
-FUNCTION is_defined, arg
+FUNCTION is_letter, char
 
    ;Sec-Doc
-   ;  PURPOSE: This function reports whether the input positional
-   ;  parameter arg is defined or not.
+   ;  PURPOSE: This function reports whether the (presumably single
+   ;  character) input positional parameter char is one of the 27 letters
+   ;  (lowercase or uppercase) of the ASCII character set or not.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
-   ;  to determine whether the input positional parameter arg is defined
-   ;  or not.
+   ;  ALGORITHM: This function checks whether the BYTE representation of
+   ;  char is within the ranges [65, 90] or [97, 122] to determine whether
+   ;  it corresponds to a letter.
    ;
-   ;  SYNTAX: res = is_defined(arg)
+   ;  SYNTAX: rc = is_letter, char)
    ;
    ;  POSITIONAL PARAMETERS [INPUT/OUTPUT]:
    ;
-   ;  *   arg [I]: An arbitrary expression.
+   ;  *   char {STRING} [I]: An arbitrary 1-character long variable.
    ;
    ;  KEYWORD PARAMETERS [INPUT/OUTPUT]: None.
    ;
@@ -20,8 +21,8 @@ FUNCTION is_defined, arg
    ;
    ;  OUTCOME:
    ;
-   ;  *   This function returns 1 if arg is defined, and 0 if it is
-   ;      UNDEFINED (Type 0).
+   ;  *   This function returns 1 if the input positional parameter char
+   ;      is an uppercase or a lowercase letter, and 0 otherwise.
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
@@ -29,29 +30,35 @@ FUNCTION is_defined, arg
    ;
    ;  REMARKS:
    ;
-   ;  *   NOTE 1: This function accepts any type of input positional
-   ;      parameter, including none at all, in which case it returns 0.
+   ;  *   NOTE 1: This function does not check whether the input
+   ;      positional parameter is of type STRING and composed of a single
+   ;      character: If that is not the case, results may be unreliable at
+   ;      best, or may cause IDL to crash. See the examples below.
    ;
    ;  EXAMPLES:
    ;
-   ;      IDL> a = [1, 2, 3]
-   ;      IDL> res = is_defined(a)
-   ;      IDL> PRINT, res
+   ;      IDL> PRINT, is_letter('c')
    ;             1
    ;
-   ;      IDL> b = !NULL
-   ;      IDL> res = is_defined(b)
-   ;      IDL> PRINT, res
+   ;      IDL> PRINT, is_letter('M')
+   ;             1
+   ;
+   ;      IDL> PRINT, is_letter('$')
    ;             0
    ;
-   ;      IDL> PRINT, is_defined()
+   ;      IDL> PRINT, is_letter(123)
    ;             0
+   ;
+   ;      IDL> PRINT, is_letter('123')
+   ;      % Expression must be a scalar or 1 element array
+   ;         in this context: <BYTE Array[3]>.
+   ;      % Execution halted at: IS_LETTER...
    ;
    ;  REFERENCES: None.
    ;
    ;  VERSIONING:
    ;
-   ;  *   2017–11–20: Version 1.0 — Initial public release.
+   ;  *   2018–12–02: Version 1.0 — Initial public release.
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
@@ -96,7 +103,9 @@ FUNCTION is_defined, arg
 
    COMPILE_OPT idl2, HIDDEN
 
-   ;  Assess whether the input positional parameter 'arg' is defined or not:
-   IF (SIZE(arg, /TYPE) NE 0) THEN RETURN, 1 ELSE RETURN, 0
+   ;  Assess whether the input positional parameter 'char' is a letter or not:
+   IF (((BYTE(char) GE 65) AND (BYTE(char) LE 90)) OR $
+      ((BYTE(char) GE 97) AND (BYTE(char) LE 122))) $
+      THEN RETURN, 1 ELSE RETURN, 0
 
 END

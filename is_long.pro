@@ -1,10 +1,11 @@
 FUNCTION is_long, arg
 
    ;Sec-Doc
-   ;  PURPOSE: This function returns 1 if the type of arg is LONG, and 0
-   ;  otherwise.
+   ;  PURPOSE: This function reports whether the input positional
+   ;  parameter arg is of type LONG or not.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE().
+   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
+   ;  to determine the type of the input positional parameter.
    ;
    ;  SYNTAX: res = is_long(arg)
    ;
@@ -14,7 +15,7 @@ FUNCTION is_long, arg
    ;
    ;  KEYWORD PARAMETERS [INPUT/OUTPUT]: None.
    ;
-   ;  RETURNED VALUE TYPE: INTEGER.
+   ;  RETURNED VALUE TYPE: INT.
    ;
    ;  OUTCOME:
    ;
@@ -26,13 +27,13 @@ FUNCTION is_long, arg
    ;
    ;  REMARKS:
    ;
-   ;  *   NOTE 1: This function accepts any type of input argument,
-   ;      including no argument at all, in which case it returns 0.
+   ;  *   NOTE 1: This function accepts any type of input positional
+   ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a LONG variable represents a
-   ;      signed 32-bit integer number, which can take values between
-   ;       − 2, 147, 483, 648 and
-   ;       + 2, 147, 483, 647.
+   ;  *   NOTE 2: Within the IDL context, a LONG variable represents an
+   ;      unsigned 32-bit integer number, which can take values between
+   ;      –2,147,483,648 and
+   ;      +2,147,483,647
    ;
    ;  EXAMPLES:
    ;
@@ -54,10 +55,13 @@ FUNCTION is_long, arg
    ;  VERSIONING:
    ;
    ;  *   2017–11–20: Version 1.0 — Initial public release.
+   ;
+   ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
+   ;      implement stricter coding standards and improve documentation.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
-   ;  *   Copyright (C) 2017-2018 Michel M. Verstraete.
+   ;  *   Copyright (C) 2017-2019 Michel M. Verstraete.
    ;
    ;      Permission is hereby granted, free of charge, to any person
    ;      obtaining a copy of this software and associated documentation
@@ -65,16 +69,17 @@ FUNCTION is_long, arg
    ;      restriction, including without limitation the rights to use,
    ;      copy, modify, merge, publish, distribute, sublicense, and/or
    ;      sell copies of the Software, and to permit persons to whom the
-   ;      Software is furnished to do so, subject to the following
+   ;      Software is furnished to do so, subject to the following three
    ;      conditions:
    ;
-   ;      The above copyright notice and this permission notice shall be
-   ;      included in all copies or substantial portions of the Software.
+   ;      1. The above copyright notice and this permission notice shall
+   ;      be included in its entirety in all copies or substantial
+   ;      portions of the Software.
    ;
-   ;      THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-   ;      EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-   ;      OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-   ;      NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+   ;      2. THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY
+   ;      KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+   ;      WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+   ;      AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
    ;      HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
    ;      WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
    ;      FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
@@ -82,12 +87,19 @@ FUNCTION is_long, arg
    ;
    ;      See: https://opensource.org/licenses/MIT.
    ;
+   ;      3. The current version of this Software is freely available from
+   ;
+   ;      https://github.com/mmverstraete.
+   ;
    ;  *   Feedback
    ;
    ;      Please send comments and suggestions to the author at
-   ;      MMVerstraete@gmail.com.
+   ;      MMVerstraete@gmail.com
    ;Sec-Cod
-   ;  Assess whether the argument 'arg' is of type LONG:
+
+   COMPILE_OPT idl2, HIDDEN
+
+   ;  Assess whether the input positional parameter 'arg' is of type LONG:
    IF (SIZE(arg, /TYPE) EQ 3) THEN RETURN, 1 ELSE RETURN, 0
 
 END

@@ -1,10 +1,11 @@
 FUNCTION is_double, arg
 
    ;Sec-Doc
-   ;  PURPOSE: This function returns 1 if the type of arg is DOUBLE, and 0
-   ;  otherwise.
+   ;  PURPOSE: This function reports whether the input positional
+   ;  parameter arg is of type DOUBLE or not.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE().
+   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
+   ;  to determine the type of the input positional parameter.
    ;
    ;  SYNTAX: res = is_double(arg)
    ;
@@ -14,7 +15,7 @@ FUNCTION is_double, arg
    ;
    ;  KEYWORD PARAMETERS [INPUT/OUTPUT]: None.
    ;
-   ;  RETURNED VALUE TYPE: INTEGER.
+   ;  RETURNED VALUE TYPE: INT.
    ;
    ;  OUTCOME:
    ;
@@ -27,8 +28,8 @@ FUNCTION is_double, arg
    ;
    ;  REMARKS:
    ;
-   ;  *   NOTE 1: This function accepts any type of input argument,
-   ;      including no argument at all, in which case it returns 0.
+   ;  *   NOTE 1: This function accepts any type of input positional
+   ;      parameter, including none at all, in which case it returns 0.
    ;
    ;  *   NOTE 2: Within the IDL context, a DOUBLE variable represents a
    ;      double precision floating point number, which can take values
@@ -37,8 +38,8 @@ FUNCTION is_double, arg
    ;      [2.2E-308, 2.0E+308] for a 64-bit machine, where the mantissa
    ;      will feature at least 15 and no more than 16 significant digits.
    ;
-   ;  *   NOTE 3: A DCOMPLEX variable is not considered of type DOUBLE.
-   ;      However, both the real and the imaginary components, taken
+   ;  *   NOTE 3: A DCOMPLEX variable is not considered of type DOUBLE,
+   ;      even though the real and the imaginary components, taken
    ;      individually, are of type DOUBLE.
    ;
    ;  EXAMPLES:
@@ -48,7 +49,7 @@ FUNCTION is_double, arg
    ;      IDL> PRINT, res
    ;             1
    ;
-   ;      IDL> b = DCOMPLEX(12.3, 4.56)
+   ;      IDL> b = DCOMPLEX(12.3D, 4.56D)
    ;      IDL> res = is_double(b)
    ;      IDL> PRINT, res
    ;             0
@@ -64,10 +65,13 @@ FUNCTION is_double, arg
    ;  VERSIONING:
    ;
    ;  *   2017–11–20: Version 1.0 — Initial public release.
+   ;
+   ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
+   ;      implement stricter coding standards and improve documentation.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
-   ;  *   Copyright (C) 2017-2018 Michel M. Verstraete.
+   ;  *   Copyright (C) 2017-2019 Michel M. Verstraete.
    ;
    ;      Permission is hereby granted, free of charge, to any person
    ;      obtaining a copy of this software and associated documentation
@@ -75,16 +79,17 @@ FUNCTION is_double, arg
    ;      restriction, including without limitation the rights to use,
    ;      copy, modify, merge, publish, distribute, sublicense, and/or
    ;      sell copies of the Software, and to permit persons to whom the
-   ;      Software is furnished to do so, subject to the following
+   ;      Software is furnished to do so, subject to the following three
    ;      conditions:
    ;
-   ;      The above copyright notice and this permission notice shall be
-   ;      included in all copies or substantial portions of the Software.
+   ;      1. The above copyright notice and this permission notice shall
+   ;      be included in its entirety in all copies or substantial
+   ;      portions of the Software.
    ;
-   ;      THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-   ;      EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-   ;      OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-   ;      NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+   ;      2. THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY
+   ;      KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+   ;      WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+   ;      AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
    ;      HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
    ;      WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
    ;      FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
@@ -92,12 +97,19 @@ FUNCTION is_double, arg
    ;
    ;      See: https://opensource.org/licenses/MIT.
    ;
+   ;      3. The current version of this Software is freely available from
+   ;
+   ;      https://github.com/mmverstraete.
+   ;
    ;  *   Feedback
    ;
    ;      Please send comments and suggestions to the author at
-   ;      MMVerstraete@gmail.com.
+   ;      MMVerstraete@gmail.com
    ;Sec-Cod
-   ;  Assess whether the argument 'arg' is of type DOUBLE:
+
+   COMPILE_OPT idl2, HIDDEN
+
+   ;  Assess whether the input positional parameter 'arg' is of type DOUBLE:
    IF (SIZE(arg, /TYPE) EQ 5) THEN RETURN, 1 ELSE RETURN, 0
 
 END

@@ -1,14 +1,14 @@
 FUNCTION is_numstring, arg
 
    ;Sec-Doc
-   ;  PURPOSE: This function returns 1 if the type of arg is STRING and
-   ;  all characters of that string are digits (0 to 9), or the + or -
-   ;  signs, or the decimal point, and 0 otherwise.
+   ;  PURPOSE: This function reports whether the input positional
+   ;  parameter arg is a STRING that contains only digits, arithmetic
+   ;  signs, or the decimal point, or not.
    ;
    ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
-   ;  to determine whether the argument is a STRING, and then check that
-   ;  each and every character in that string is a digit, or a sign, or
-   ;  the decimal point.
+   ;  to determine whether the input positional parameter arg is a STRING,
+   ;  and then checks whether each and every character in that string is a
+   ;  digit, or an arithmetic sign, or the decimal point.
    ;
    ;  SYNTAX: res = is_numstring(arg)
    ;
@@ -18,13 +18,13 @@ FUNCTION is_numstring, arg
    ;
    ;  KEYWORD PARAMETERS [INPUT/OUTPUT]: None.
    ;
-   ;  RETURNED VALUE TYPE: INTEGER.
+   ;  RETURNED VALUE TYPE: INT.
    ;
    ;  OUTCOME:
    ;
-   ;  *   This function returns 1 if arg is of type STRING and each
-   ;      character of that string is either a digit, or a sign, or a
-   ;      decimal point, and 0 otherwise.
+   ;  *   This function returns 1 if arg is of type STRING and if each
+   ;      character of that string is either a digit (0 to 9), or a sign
+   ;      (+ or -), or a decimal point, and 0 otherwise.
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
@@ -32,8 +32,8 @@ FUNCTION is_numstring, arg
    ;
    ;  REMARKS:
    ;
-   ;  *   NOTE 1: This function accepts any type of input argument,
-   ;      including no argument at all, in which case it returns 0.
+   ;  *   NOTE 1: This function accepts any type of input positional
+   ;      parameter, including none at all, in which case it returns 0.
    ;
    ;  EXAMPLES:
    ;
@@ -49,15 +49,22 @@ FUNCTION is_numstring, arg
    ;      IDL> PRINT, is_numstring(c)
    ;             1
    ;
+   ;      IDL> d = '4x'
+   ;      IDL> PRINT, is_numstring(d)
+   ;             0
+   ;
    ;  REFERENCES: None.
    ;
    ;  VERSIONING:
    ;
    ;  *   2018–08–07: Version 0.9 — Initial release.
+   ;
+   ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
+   ;      implement stricter coding standards and improve documentation.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
-   ;  *   Copyright (C) 2017-2018 Michel M. Verstraete.
+   ;  *   Copyright (C) 2017-2019 Michel M. Verstraete.
    ;
    ;      Permission is hereby granted, free of charge, to any person
    ;      obtaining a copy of this software and associated documentation
@@ -65,16 +72,17 @@ FUNCTION is_numstring, arg
    ;      restriction, including without limitation the rights to use,
    ;      copy, modify, merge, publish, distribute, sublicense, and/or
    ;      sell copies of the Software, and to permit persons to whom the
-   ;      Software is furnished to do so, subject to the following
+   ;      Software is furnished to do so, subject to the following three
    ;      conditions:
    ;
-   ;      The above copyright notice and this permission notice shall be
-   ;      included in all copies or substantial portions of the Software.
+   ;      1. The above copyright notice and this permission notice shall
+   ;      be included in its entirety in all copies or substantial
+   ;      portions of the Software.
    ;
-   ;      THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-   ;      EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-   ;      OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-   ;      NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+   ;      2. THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY
+   ;      KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+   ;      WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+   ;      AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
    ;      HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
    ;      WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
    ;      FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
@@ -82,12 +90,20 @@ FUNCTION is_numstring, arg
    ;
    ;      See: https://opensource.org/licenses/MIT.
    ;
+   ;      3. The current version of this Software is freely available from
+   ;
+   ;      https://github.com/mmverstraete.
+   ;
    ;  *   Feedback
    ;
    ;      Please send comments and suggestions to the author at
-   ;      MMVerstraete@gmail.com.
+   ;      MMVerstraete@gmail.com
    ;Sec-Cod
 
+   COMPILE_OPT idl2, HIDDEN
+
+   ;  Assess whether the input positional parameter 'arg' contains only digits,
+   ;  arithmetic signs or the decimal point:
    IF (SIZE(arg, /TYPE) EQ 7) THEN BEGIN
       arglen = STRLEN(arg)
       FOR i = 0, arglen - 1 DO BEGIN

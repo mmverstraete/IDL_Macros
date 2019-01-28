@@ -1,12 +1,12 @@
 FUNCTION is_single, arg
 
    ;Sec-Doc
-   ;  PURPOSE: This function returns 1 if the type of argument arg refers
-   ;  to a single precision number (i.e., BYTE (1), INT (2), LONG (3),
-   ;  FLOAT (4), COMPLEX (6), UINT (12), ULONG (13), LONG64 (14) or
-   ;  ULONG64 (15)), and 0 otherwise.
+   ;  PURPOSE: This function reports whether the input positional
+   ;  parameter arg is a single precision integer, floating point or
+   ;  complex number or not.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE().
+   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
+   ;  to determine the type of the input positional parameter.
    ;
    ;  SYNTAX: res = is_single(arg)
    ;
@@ -16,13 +16,12 @@ FUNCTION is_single, arg
    ;
    ;  KEYWORD PARAMETERS [INPUT/OUTPUT]: None.
    ;
-   ;  RETURNED VALUE TYPE: INTEGER.
+   ;  RETURNED VALUE TYPE: INT.
    ;
    ;  OUTCOME:
    ;
    ;  *   This function returns 1 if arg is of type BYTE (1), INT (2),
-   ;      LONG (3), FLOAT (4), COMPLEX (6), UINT (12), ULONG (13),
-   ;      LONG64 (14) or ULONG64 (15), and 0 otherwise.
+   ;      FLOAT (4), COMPLEX (6), UINT (12), and 0 otherwise.
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
@@ -30,8 +29,8 @@ FUNCTION is_single, arg
    ;
    ;  REMARKS:
    ;
-   ;  *   NOTE 1: This function accepts any type of input argument,
-   ;      including no argument at all, in which case it returns 0.
+   ;  *   NOTE 1: This function accepts any type of input positional
+   ;      parameter, including none at all, in which case it returns 0.
    ;
    ;  EXAMPLES:
    ;
@@ -44,6 +43,9 @@ FUNCTION is_single, arg
    ;      IDL> PRINT, is_single(COMPLEX(3.5, 1.0))
    ;             1
    ;
+   ;      IDL> PRINT, is_single(345LL)
+   ;             0
+   ;
    ;      IDL> PRINT, is_single(DOUBLE(78.0))
    ;             0
    ;
@@ -55,10 +57,13 @@ FUNCTION is_single, arg
    ;  VERSIONING:
    ;
    ;  *   2017–11–20: Version 1.0 — Initial public release.
+   ;
+   ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
+   ;      implement stricter coding standards and improve documentation.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
-   ;  *   Copyright (C) 2017-2018 Michel M. Verstraete.
+   ;  *   Copyright (C) 2017-2019 Michel M. Verstraete.
    ;
    ;      Permission is hereby granted, free of charge, to any person
    ;      obtaining a copy of this software and associated documentation
@@ -66,16 +71,17 @@ FUNCTION is_single, arg
    ;      restriction, including without limitation the rights to use,
    ;      copy, modify, merge, publish, distribute, sublicense, and/or
    ;      sell copies of the Software, and to permit persons to whom the
-   ;      Software is furnished to do so, subject to the following
+   ;      Software is furnished to do so, subject to the following three
    ;      conditions:
    ;
-   ;      The above copyright notice and this permission notice shall be
-   ;      included in all copies or substantial portions of the Software.
+   ;      1. The above copyright notice and this permission notice shall
+   ;      be included in its entirety in all copies or substantial
+   ;      portions of the Software.
    ;
-   ;      THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-   ;      EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-   ;      OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-   ;      NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+   ;      2. THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY
+   ;      KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+   ;      WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+   ;      AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
    ;      HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
    ;      WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
    ;      FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
@@ -83,16 +89,22 @@ FUNCTION is_single, arg
    ;
    ;      See: https://opensource.org/licenses/MIT.
    ;
+   ;      3. The current version of this Software is freely available from
+   ;
+   ;      https://github.com/mmverstraete.
+   ;
    ;  *   Feedback
    ;
    ;      Please send comments and suggestions to the author at
-   ;      MMVerstraete@gmail.com.
+   ;      MMVerstraete@gmail.com
    ;Sec-Cod
-   ;  Assess whether the argument 'arg' is of one of the single precision types:
+
+   COMPILE_OPT idl2, HIDDEN
+
+   ;  Assess whether the input positional parameter 'arg' is of one of the
+   ;  single precision types:
    res = SIZE(arg, /TYPE)
-   IF (((res GT 0) AND (res LT 5)) OR $
-      (res EQ 6) OR $
-      ((res GT 11) AND (res LT 16))) $
+   IF ((res EQ 1) OR (res EQ 2) OR (res EQ 4) OR (res EQ 6) OR (res EQ 12)) $
       THEN RETURN, 1 ELSE RETURN, 0
 
 END
