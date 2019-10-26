@@ -1,17 +1,19 @@
-FUNCTION is_ulong, arg
+FUNCTION is_lowercase, char
 
    ;Sec-Doc
    ;  PURPOSE: This function reports whether the input positional
-   ;  parameter arg is of type ULONG or not.
+   ;  parameter char is a single lowercase character or not.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
-   ;  to determine the type of the input positional parameter.
+   ;  ALGORITHM: This function returns 1 if the input positional parameter
+   ;  char meets the following 4 conditions: (1) it is of type STRING, (2)
+   ;  it is a scalar, (3) it is of length 1, and (4) its BYTE value lies
+   ;  in the range [97, 122].
    ;
-   ;  SYNTAX: res = is_ulong(arg)
+   ;  SYNTAX: res = is_lowercase(char)
    ;
    ;  POSITIONAL PARAMETERS [INPUT/OUTPUT]:
    ;
-   ;  *   arg [I]: An arbitrary expression.
+   ;  *   char {STRING} [I]: The single character to be tested.
    ;
    ;  KEYWORD PARAMETERS [INPUT/OUTPUT]: None.
    ;
@@ -19,8 +21,8 @@ FUNCTION is_ulong, arg
    ;
    ;  OUTCOME:
    ;
-   ;  *   This function returns 1 if arg is of type ULONG, and 0
-   ;      otherwise.
+   ;  *   This function returns 1 if the input positional parameter is a
+   ;      single character set in lowercase, and 0 otherwise.
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
@@ -31,38 +33,39 @@ FUNCTION is_ulong, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
-   ;      array.
-   ;
-   ;  *   NOTE 3: Within the IDL context, a ULONG variable represents an
-   ;      unsigned 32-bit integer number, which can take values between 0
-   ;      and 4,294,967,295
+   ;  *   NOTE 2: The input positional parameter char must be a scalar.
    ;
    ;  EXAMPLES:
    ;
-   ;      IDL> PRINT, is_ulong(123456789UL)
-   ;            1
+   ;      IDL> char = 'a'
+   ;      IDL> res = is_lowercase(char)
+   ;      IDL> PRINT, 'res = ', res
+   ;      res =            1
    ;
-   ;      IDL> PRINT, is_ulong(12L)
-   ;            0
-   ;
-   ;      IDL> PRINT, is_ulong([12UL, 15UL])
-   ;            1
-   ;
-   ;      IDL> PRINT, is_ulong()
-   ;            0
+   ;      IDL> char = 'Z'
+   ;      IDL> res = is_lowercase(char)
+   ;      IDL> PRINT, 'res = ', res
+   ;      res =            0
    ;
    ;  REFERENCES: None.
    ;
    ;  VERSIONING:
    ;
-   ;  *   2017–11–20: Version 1.0 — Initial public release.
+   ;  *   2017–11–18: Version 1.0 — Initial release.
+   ;
+   ;  *   2018–01–15: Version 1.1 — Implement optional debugging.
+   ;
+   ;  *   2018–06–01: Version 1.5 — Implement new coding standards.
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
    ;
+   ;  *   2019–06–15: Version 2.01 — Simplify the code and move this
+   ;      function from the repository Utilities to the repository Macros.
+   ;
    ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
-   ;      documentation standards, and switch to 3-parts version
+   ;      documentation standards (in particular regarding the assignment
+   ;      of numeric return codes), and switch to 3-parts version
    ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
@@ -105,7 +108,20 @@ FUNCTION is_ulong, arg
 
    COMPILE_OPT idl2, HIDDEN
 
-   ;  Assess whether the input positional parameter 'arg' is of type ULONG:
-   IF (SIZE(arg, /TYPE) EQ 13) THEN RETURN, 1 ELSE RETURN, 0
+   ;  Verify that the argument char is of type STRING:
+   IF (is_string(char)) THEN BEGIN
+
+   ;  Verify that the argument char is a scalar:
+      IF (is_scalar(char)) THEN BEGIN
+
+   ;  Verify that the argument char is of length 1:
+         IF (STRLEN(char) EQ 1) THEN BEGIN
+
+   ;  Verify that the argument char is a lowercase character:
+            IF ((BYTE(char) GE 97) AND (BYTE(char) LE 122)) $
+               THEN RETURN, 1 ELSE RETURN, 0
+         ENDIF ELSE RETURN, 0
+      ENDIF ELSE RETURN, 0
+   ENDIF ELSE RETURN, 0
 
 END

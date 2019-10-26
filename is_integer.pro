@@ -31,7 +31,10 @@ FUNCTION is_integer, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, an INT variable represents a
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, an INT variable represents a
    ;      signed 16-bit integer number, which can take values between
    ;      -32,768 and +32,767; a UINT variable represents an unsigned
    ;      16-bit integer number, which can take values between 0 and
@@ -45,11 +48,11 @@ FUNCTION is_integer, arg
    ;      ULONG64 variable represents an unsigned 64-bit integer number,
    ;      which can take values between 0 and 18,446,744,073,709,551,615.
    ;
-   ;  *   NOTE 3: Note the more permissive interpretation of type INTEGER,
+   ;  *   NOTE 4: Note the more permissive interpretation of type INTEGER,
    ;      which returns a positive answer for any one of the 6 types of
    ;      integer numbers allowed in IDL.
    ;
-   ;  *   NOTE 4: Contrary to the case of floating point numbers, if an
+   ;  *   NOTE 5: Contrary to the case of floating point numbers, if an
    ;      integer constant larger than  + 32, 767 is assigned to a
    ;      variable, the latter becomes a LONG integer.
    ;
@@ -58,28 +61,32 @@ FUNCTION is_integer, arg
    ;      IDL> a = 10
    ;      IDL> res = is_integer(a)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
    ;
    ;      IDL> b = 1.23
    ;      IDL> res = is_integer(b)
    ;      IDL> PRINT, res
-   ;             0
+   ;            0
    ;
    ;      IDL> c = 40000
    ;      IDL> PRINT, is_integer(c)
-   ;             1
+   ;            1
    ;      IDL> PRINT, is_int(c)
-   ;             0
+   ;            0
    ;      IDL> PRINT, is_long(c)
-   ;             1
+   ;            1
    ;
    ;      IDL> d = -9223372036854LL
    ;      IDL> res = is_integer(d)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
+   ;
+   ;      IDL> e = [12, 24, 40000]
+   ;      IDL> PRINT, is_integer(e)
+   ;            1
    ;
    ;      IDL> PRINT, is_integer()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -89,6 +96,15 @@ FUNCTION is_integer, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–06–19: Version 2.01 — Update the function to return 1 when
+   ;      the input positional parameter arg is of type BYTE, which is
+   ;      often used as an 8-bit integer while generating color graphics
+   ;      output.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
@@ -131,7 +147,8 @@ FUNCTION is_integer, arg
    COMPILE_OPT idl2, HIDDEN
 
    ;  Assess whether the input positional parameter 'arg' is of one of the INTEGER types:
-   IF ((SIZE(arg, /TYPE) EQ 2) OR $
+   IF ((SIZE(arg, /TYPE) EQ 1) OR $
+      (SIZE(arg, /TYPE) EQ 2) OR $
       (SIZE(arg, /TYPE) EQ 12) OR $
       (SIZE(arg, /TYPE) EQ 3) OR $
       (SIZE(arg, /TYPE) EQ 13) OR $

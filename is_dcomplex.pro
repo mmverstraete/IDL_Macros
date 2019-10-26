@@ -31,7 +31,10 @@ FUNCTION is_dcomplex, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a variable of type DCOMPLEX is
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, a variable of type DCOMPLEX is
    ;      represented as a couple of double precision real numbers, but an
    ;      array of two double precision real numbers is not considered a
    ;      complex number.
@@ -41,14 +44,18 @@ FUNCTION is_dcomplex, arg
    ;      IDL> c = DCOMPLEX(3.0D, 4.0D)
    ;      IDL> res = is_dcomplex(c)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
+   ;
+   ;      IDL> d = 2 * c
+   ;      IDL> PRINT, is_dcomplex([c, d])
+   ;            1
    ;
    ;      IDL> res = is_dcomplex([12.3D, 45.6D])
    ;      IDL> PRINT, res
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_dcomplex()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -58,6 +65,10 @@ FUNCTION is_dcomplex, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

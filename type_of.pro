@@ -7,7 +7,7 @@ FUNCTION type_of, arg, type_code, type_name
    ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
    ;  to determine the type of the input positional parameter.
    ;
-   ;  SYNTAX: rc = type_of(arg, type_code, type_name)
+   ;  SYNTAX: res = type_of(arg, type_code, type_name)
    ;
    ;  POSITIONAL PARAMETERS [INPUT/OUTPUT]:
    ;
@@ -38,22 +38,30 @@ FUNCTION type_of, arg, type_code, type_name
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
    ;  EXAMPLES:
    ;
    ;      IDL> a = 36B
-   ;      IDL> rc = type_of(a, type_code, type_name)
+   ;      IDL> res = type_of(a, type_code, type_name)
    ;      IDL> PRINT, type_code, '   ', type_name
-   ;                 1   BYTE
+   ;               1   BYTE
    ;
    ;      IDL> b = 987.32
-   ;      IDL> rc = type_of(b, type_code, type_name)
+   ;      IDL> res = type_of(b, type_code, type_name)
    ;      IDL> PRINT, type_code, '   ', type_name
-   ;                 4   FLOAT
+   ;               4   FLOAT
    ;
    ;      IDL> c = 'Hello World!'
-   ;      IDL> rc = type_of(c, type_code, type_name)
+   ;      IDL> res = type_of(c, type_code, type_name)
    ;      IDL> PRINT, type_code, '   ', type_name
-   ;                 7   STRING
+   ;               7   STRING
+   ;
+   ;      IDL> d = [2.3D, 4.5D]
+   ;      IDL> res = type_of(d, type_code, type_name)
+   ;      IDL> PRINT, type_code, '   ', type_name
+   ;               5   DOUBLE
    ;
    ;      IDL> PRINT, type_of()
    ;             0
@@ -66,6 +74,10 @@ FUNCTION type_of, arg, type_code, type_name
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

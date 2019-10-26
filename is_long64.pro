@@ -31,20 +31,26 @@ FUNCTION is_long64, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a LONG64 variable represents a
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, a LONG64 variable represents a
    ;      signed 64-bit integer number, which can take values between
    ;      –9,223,372,036,854,775,808 and +9,223,372,036,854,775,807.
    ;
    ;  EXAMPLES:
    ;
    ;      IDL> PRINT, is_long64(123LL)
-   ;             1
+   ;            1
+   ;
+   ;      IDL> PRINT, is_long64([123LL, 456LL])
+   ;            1
    ;
    ;      IDL> PRINT, is_long64(123456UL)
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_long64()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -54,6 +60,10 @@ FUNCTION is_long64, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

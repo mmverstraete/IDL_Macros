@@ -32,29 +32,35 @@ FUNCTION is_numeric, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
    ;  EXAMPLES:
    ;
    ;      IDL> .reset
    ;      IDL> PRINT, is_numeric(zzz)
-   ;             0
+   ;            0
    ;
    ;      IDL> a = 12B
    ;      IDL> res = is_numeric(a)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
    ;
    ;      IDL> b = 'Hello'
    ;      IDL> res = is_numeric(b)
    ;      IDL> PRINT, res
-   ;             0
+   ;            0
    ;
    ;      IDL> c = 12.3
    ;      IDL> res = is_numeric(c)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
+   ;
+   ;      IDL> PRINT, is_numeric([2, 3.4])
+   ;            1
    ;
    ;      IDL> PRINT, is_numeric()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -64,6 +70,10 @@ FUNCTION is_numeric, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

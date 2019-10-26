@@ -31,14 +31,17 @@ FUNCTION is_double, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a DOUBLE variable represents a
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, a DOUBLE variable represents a
    ;      double precision floating point number, which can take values
    ;      within a range that is hardware-dependent. The IDL function
    ;      MACHAR(/DOUBLE) reports the extent of this range, for instance
    ;      [2.2E-308, 2.0E+308] for a 64-bit machine, where the mantissa
    ;      will feature at least 15 and no more than 16 significant digits.
    ;
-   ;  *   NOTE 3: A DCOMPLEX variable is not considered of type DOUBLE,
+   ;  *   NOTE 4: A DCOMPLEX variable is not considered of type DOUBLE,
    ;      even though the real and the imaginary components, taken
    ;      individually, are of type DOUBLE.
    ;
@@ -47,18 +50,22 @@ FUNCTION is_double, arg
    ;      IDL> a = 3.14159D
    ;      IDL> res = is_double(a)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
    ;
-   ;      IDL> b = DCOMPLEX(12.3D, 4.56D)
-   ;      IDL> res = is_double(b)
+   ;      IDL> b = 2 * a
+   ;      IDL> PRINT, is_double([a, b])
+   ;            1
+   ;
+   ;      IDL> c = DCOMPLEX(12.3D, 4.56D)
+   ;      IDL> res = is_double(c)
    ;      IDL> PRINT, res
-   ;             0
-   ;      IDL> res = is_double(IMAGINARY(b))
+   ;            0
+   ;      IDL> res = is_double(IMAGINARY(c))
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_double()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -68,6 +75,10 @@ FUNCTION is_double, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

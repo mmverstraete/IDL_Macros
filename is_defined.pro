@@ -4,9 +4,9 @@ FUNCTION is_defined, arg
    ;  PURPOSE: This function reports whether the input positional
    ;  parameter arg is defined or not.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
-   ;  to determine whether the input positional parameter arg is defined
-   ;  or not.
+   ;  ALGORITHM: This function relies on the IDL built-in function SIZE to
+   ;  determine whether the input positional parameter arg is defined or
+   ;  not.
    ;
    ;  SYNTAX: res = is_defined(arg)
    ;
@@ -32,20 +32,27 @@ FUNCTION is_defined, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
    ;  EXAMPLES:
    ;
-   ;      IDL> a = [1, 2, 3]
-   ;      IDL> res = is_defined(a)
-   ;      IDL> PRINT, res
-   ;             1
+   ;      IDL> a = 'Hello'
+   ;      IDL> PRINT, is_defined(a)
+   ;            1
    ;
-   ;      IDL> b = !NULL
+   ;      IDL> b = [1, 2, 3]
    ;      IDL> res = is_defined(b)
    ;      IDL> PRINT, res
-   ;             0
+   ;            1
+   ;
+   ;      IDL> c = !NULL
+   ;      IDL> res = is_defined(c)
+   ;      IDL> PRINT, res
+   ;            0
    ;
    ;      IDL> PRINT, is_defined()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -55,6 +62,10 @@ FUNCTION is_defined, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

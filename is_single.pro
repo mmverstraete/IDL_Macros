@@ -32,25 +32,31 @@ FUNCTION is_single, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
    ;  EXAMPLES:
    ;
    ;      IDL> PRINT, is_single(2)
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_single(5B)
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_single(COMPLEX(3.5, 1.0))
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_single(345LL)
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_single(DOUBLE(78.0))
-   ;             0
+   ;            0
+   ;
+   ;      IDL> PRINT, is_single([1.2, 3.4])
+   ;            1
    ;
    ;      IDL> PRINT, is_single()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -60,6 +66,10 @@ FUNCTION is_single, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

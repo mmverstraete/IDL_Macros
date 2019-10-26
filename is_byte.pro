@@ -30,13 +30,16 @@ FUNCTION is_byte, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a BYTE variable represents an
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, a BYTE variable represents an
    ;      unsigned 8-bit integer number, which can take values between 0
    ;      and 255, but small integers in that range are not characterized
    ;      as bytes, unless explicitly stated: the default type for
    ;      integers is a 16-bit INT.
    ;
-   ;  *   NOTE 3: Within the ASCII context, there is a direct relation
+   ;  *   NOTE 4: Within the ASCII context, there is a direct relation
    ;      between integers in the range 0 to 255 and corresponding
    ;      character representations, but these are not interchangeable in
    ;      IDL. See the following examples.
@@ -46,24 +49,27 @@ FUNCTION is_byte, arg
    ;      IDL> a = 72B
    ;      IDL> res = is_byte(a)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
    ;
    ;      IDL> b = STRING(a)
    ;      IDL> PRINT, b
    ;      H
    ;      IDL> res = is_byte(b)
    ;      IDL> PRINT, res
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, BYTE('H')
    ;        72
    ;      IDL> c = 72
    ;      IDL> res = is_byte(c)
    ;      IDL> PRINT, res
-   ;             0
+   ;            0
+   ;
+   ;      IDL> PRINT, is_byte([2B, 4B])
+   ;            1
    ;
    ;      IDL> PRINT, is_byte()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -73,6 +79,10 @@ FUNCTION is_byte, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

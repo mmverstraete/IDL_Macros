@@ -1,19 +1,21 @@
-FUNCTION is_letter, char
+FUNCTION is_letter, arg
 
    ;Sec-Doc
-   ;  PURPOSE: This function reports whether the (presumably single
-   ;  character) input positional parameter char is one of the 27 letters
-   ;  (lowercase or uppercase) of the ASCII character set or not.
+   ;  PURPOSE: This function reports whether the input positional
+   ;  parameter arg is one of the 26 letters (lowercase or uppercase) of
+   ;  the ASCII character set or not.
    ;
-   ;  ALGORITHM: This function checks whether the BYTE representation of
-   ;  char is within the ranges [65, 90] or [97, 122] to determine whether
-   ;  it corresponds to a letter.
+   ;  ALGORITHM: This function screens out all arguments that are not of
+   ;  type BYTE or STRING, as well as all STRINGs longer than a single
+   ;  character, and checks whether the BYTE representation of arg is
+   ;  within the ranges [65, 90] or [97, 122] to determine whether it
+   ;  corresponds to a letter.
    ;
-   ;  SYNTAX: rc = is_letter, char)
+   ;  SYNTAX: res = is_letter(arg)
    ;
    ;  POSITIONAL PARAMETERS [INPUT/OUTPUT]:
    ;
-   ;  *   char {STRING} [I]: An arbitrary 1-character long variable.
+   ;  *   arg [I]: An arbitrary expression.
    ;
    ;  KEYWORD PARAMETERS [INPUT/OUTPUT]: None.
    ;
@@ -21,8 +23,8 @@ FUNCTION is_letter, char
    ;
    ;  OUTCOME:
    ;
-   ;  *   This function returns 1 if the input positional parameter char
-   ;      is an uppercase or a lowercase letter, and 0 otherwise.
+   ;  *   This function returns 1 if the input positional parameter arg is
+   ;      a single uppercase or a lowercase letter, and 0 otherwise.
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
@@ -30,29 +32,32 @@ FUNCTION is_letter, char
    ;
    ;  REMARKS:
    ;
-   ;  *   NOTE 1: This function does not check whether the input
-   ;      positional parameter is of type STRING and composed of a single
-   ;      character: If that is not the case, results may be unreliable at
-   ;      best, or may cause IDL to crash. See the examples below.
+   ;  *   NOTE 1: This function returns 0 if the input positional
+   ;      parameter arg is of type STRING but contains more than 1
+   ;      character, or is an array of any type: See the examples below.
    ;
    ;  EXAMPLES:
    ;
    ;      IDL> PRINT, is_letter('c')
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_letter('M')
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_letter('$')
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_letter(123)
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_letter('123')
-   ;      % Expression must be a scalar or 1 element array
-   ;         in this context: <BYTE Array[3]>.
-   ;      % Execution halted at: IS_LETTER...
+   ;            0
+   ;
+   ;      IDL> PRINT, is_letter(['a', 'b'])
+   ;            0
+   ;
+   ;      IDL> PRINT, is_letter(!NULL)
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -62,6 +67,17 @@ FUNCTION is_letter, char
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–06–10: Version 2.01 — Update the code to handle any type of
+   ;      input positional argument.
+   ;
+   ;  *   2019–06–19: Version 2.02 — Update the documentation to note that
+   ;      this function returns 0 if the input positional parameter
+   ;      contains more than 1 character.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
@@ -103,9 +119,22 @@ FUNCTION is_letter, char
 
    COMPILE_OPT idl2, HIDDEN
 
-   ;  Assess whether the input positional parameter 'char' is a letter or not:
-   IF (((BYTE(char) GE 65) AND (BYTE(char) LE 90)) OR $
-      ((BYTE(char) GE 97) AND (BYTE(char) LE 122))) $
-      THEN RETURN, 1 ELSE RETURN, 0
+   IF (is_array(arg)) THEN RETURN, 0
+   rc = type_of(arg, type_code, type_name)
+   CASE type_code OF
+      1: BEGIN
+         IF (((arg GE 65) AND (arg LE 90)) OR $
+            ((arg GE 97) AND (arg LE 122))) $
+            THEN RETURN, 1 ELSE RETURN, 0
+      END
+      7: BEGIN
+         IF (STRLEN(arg) EQ 1) THEN BEGIN
+            IF (((BYTE(arg) GE 65) AND (BYTE(arg) LE 90)) OR $
+               ((BYTE(arg) GE 97) AND (BYTE(arg) LE 122))) $
+               THEN RETURN, 1 ELSE RETURN, 0
+         ENDIF ELSE RETURN, 0
+      END
+      ELSE: RETURN, 0
+   ENDCASE
 
 END

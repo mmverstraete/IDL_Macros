@@ -33,35 +33,41 @@ FUNCTION is_positive, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: This function considers complex numbers to be always
+   ;  *   NOTE 2: This function returns 0 if the input positional
+   ;      parameter is an array of any type.
+   ;
+   ;  *   NOTE 3: This function considers complex numbers to be always
    ;      positive, independently from the sign of the real and imaginary
    ;      parts.
    ;
    ;  EXAMPLES:
    ;
    ;      IDL> PRINT, is_positive(1234)
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_positive(0.0)
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_positive(-0.1E-20)
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_positive('12')
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_positive(COMPLEX(-1.0, 0.0))
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_positive(COMPLEX(1.0, -20.0))
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_positive(COMPLEX(-1.0, -20.0))
-   ;             1
+   ;            1
+   ;
+   ;      IDL> PRINT, is_positive([1, 2])
+   ;            0
    ;
    ;      IDL> PRINT, is_positive()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -71,6 +77,10 @@ FUNCTION is_positive, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
@@ -113,6 +123,7 @@ FUNCTION is_positive, arg
    COMPILE_OPT idl2, HIDDEN
 
    ;  Assess whether the input positional parameter 'arg' is positive:
+   IF (is_array(arg)) THEN RETURN, 0
    IF (is_numeric(arg) EQ 1) THEN BEGIN
       IF (arg GE 0) THEN RETURN, 1 ELSE RETURN, 0
    ENDIF ELSE BEGIN

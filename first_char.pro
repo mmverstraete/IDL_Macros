@@ -1,13 +1,13 @@
-FUNCTION is_ulong, arg
+FUNCTION first_char, arg
 
    ;Sec-Doc
-   ;  PURPOSE: This function reports whether the input positional
-   ;  parameter arg is of type ULONG or not.
+   ;  PURPOSE: This function returns the first character of the input
+   ;  positional parameter arg.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
-   ;  to determine the type of the input positional parameter.
+   ;  ALGORITHM: This function relies on IDL built-in string functions to
+   ;  extract the desired character.
    ;
-   ;  SYNTAX: res = is_ulong(arg)
+   ;  SYNTAX: res = first_char(arg)
    ;
    ;  POSITIONAL PARAMETERS [INPUT/OUTPUT]:
    ;
@@ -15,12 +15,13 @@ FUNCTION is_ulong, arg
    ;
    ;  KEYWORD PARAMETERS [INPUT/OUTPUT]: None.
    ;
-   ;  RETURNED VALUE TYPE: INT.
+   ;  RETURNED VALUE TYPE: STRING.
    ;
    ;  OUTCOME:
    ;
-   ;  *   This function returns 1 if arg is of type ULONG, and 0
-   ;      otherwise.
+   ;  *   This function returns the first character of the input
+   ;      positional parameter arg if it is of type STRING and contains at
+   ;      least one character, and ” otherwise.
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
@@ -29,28 +30,24 @@ FUNCTION is_ulong, arg
    ;  REMARKS:
    ;
    ;  *   NOTE 1: This function accepts any type of input positional
-   ;      parameter, including none at all, in which case it returns 0.
+   ;      parameter, including none at all, in which case it returns the
+   ;      null string ”.
    ;
-   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
-   ;      array.
-   ;
-   ;  *   NOTE 3: Within the IDL context, a ULONG variable represents an
-   ;      unsigned 32-bit integer number, which can take values between 0
-   ;      and 4,294,967,295
+   ;  *   NOTE 2: The input positional parameter char must be a scalar.
    ;
    ;  EXAMPLES:
    ;
-   ;      IDL> PRINT, is_ulong(123456789UL)
-   ;            1
+   ;      IDL> PRINT, '>' + first_char('Hello World') + '<'
+   ;      >H<
    ;
-   ;      IDL> PRINT, is_ulong(12L)
-   ;            0
+   ;      IDL> PRINT, '>' + first_char(3.14) + '<'
+   ;      ><
    ;
-   ;      IDL> PRINT, is_ulong([12UL, 15UL])
-   ;            1
+   ;      IDL> PRINT, '>' + first_char()  + '<'
+   ;      ><
    ;
-   ;      IDL> PRINT, is_ulong()
-   ;            0
+   ;      IDL> PRINT, '>' + first_char(['Hello', 'World'])  + '<'
+   ;      ><
    ;
    ;  REFERENCES: None.
    ;
@@ -58,11 +55,16 @@ FUNCTION is_ulong, arg
    ;
    ;  *   2017–11–20: Version 1.0 — Initial public release.
    ;
+   ;  *   2018–01–15: Version 1.1 — Implement optional debugging.
+   ;
+   ;  *   2018–06–01: Version 1.5 — Implement new coding standards.
+   ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
    ;
-   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
-   ;      documentation standards, and switch to 3-parts version
+   ;  *   2019–08–20: Version 2.1.0 — Simplify the code, move it from
+   ;      repository Utilities to repository Macros, adopt revised coding
+   ;      and documentation standards, and switch to 3-parts version
    ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
@@ -105,7 +107,12 @@ FUNCTION is_ulong, arg
 
    COMPILE_OPT idl2, HIDDEN
 
-   ;  Assess whether the input positional parameter 'arg' is of type ULONG:
-   IF (SIZE(arg, /TYPE) EQ 13) THEN RETURN, 1 ELSE RETURN, 0
+   ;  Verify that the input positional parameter 'arg' is of type STRING and
+   ;  contains at least one character:
+   IF (is_scalar(arg)) THEN BEGIN
+      IF ((is_string(arg)) AND (STRLEN(arg) GT 0)) THEN BEGIN
+         RETURN, STRMID(arg, 0, 1)
+      ENDIF ELSE RETURN, ''
+   ENDIF ELSE RETURN, ''
 
 END

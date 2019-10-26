@@ -31,14 +31,17 @@ FUNCTION is_float, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a FLOAT variable represents a
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, a FLOAT variable represents a
    ;      single precision floating point number, which can take values
    ;      within a range that is hardware-dependent. The IDL function
    ;      MACHAR() reports the extent of this range, for instance
    ;      [1.2E-38, 3.4E+38] for a 64-bit machine, where the mantissa will
    ;      feature at least 6 and no more than 7 significant digits.
    ;
-   ;  *   NOTE 3: If a real number with more than 7 significant digits is
+   ;  *   NOTE 4: If a real number with more than 7 significant digits is
    ;      assigned to a variable without specifying that it should be
    ;      saved in double precision, the variable will contain a truncated
    ;      representation of that number, and thus be considered of type
@@ -56,14 +59,14 @@ FUNCTION is_float, arg
    ;      IDL> PRINT, res
    ;             0
    ;
-   ;      IDL> c = 1.23456789
+   ;      IDL> c = 1.2345678987
    ;      IDL> res = is_float(c)
    ;      IDL> PRINT, res
    ;             1
    ;      IDL> PRINT, c
-   ;            1.23457
-   ;      IDL> PRINT, c, FORMAT = '(F10.8)'
-   ;            1.23456788
+   ;         1.23457
+   ;      IDL> PRINT, c, FORMAT = '(F12.10)'
+   ;         1.2345678806
    ;
    ;      IDL> PRINT, is_float()
    ;             0
@@ -76,6 +79,10 @@ FUNCTION is_float, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

@@ -31,7 +31,10 @@ FUNCTION is_complex, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a variable of type COMPLEX is
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, a variable of type COMPLEX is
    ;      represented as a couple of real numbers, but an array of two
    ;      real numbers is not considered a complex number.
    ;
@@ -40,19 +43,25 @@ FUNCTION is_complex, arg
    ;      IDL> a = COMPLEX(1.0, 2.0)
    ;      IDL> res = is_complex(a)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
    ;
    ;      IDL> b = [12.3, 45.6]
    ;      IDL> res = is_complex(b)
    ;      IDL> PRINT, res
-   ;             0
+   ;            0
+   ;
+   ;      IDL> c = 2 * a
+   ;      IDL> PRINT, c
+   ;      (      2.00000,      4.00000)
+   ;      IDL> PRINT, is_complex([a, c])
+   ;            1
    ;
    ;      IDL> res = is_complex('test')
    ;      IDL> PRINT, res
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_complex()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -62,6 +71,10 @@ FUNCTION is_complex, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

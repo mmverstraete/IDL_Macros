@@ -7,10 +7,54 @@
    </head>
 <body>
 <h1>Documentation for the IDL routines in project Macros</h1>
+<h2>first_char</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns the first character of the input positional parameter <code>arg</code>.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on <code>IDL</code> built-in string functions to extract the desired character.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = first_char(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>STRING</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns the first character of the input positional parameter <code>arg</code> if it is of type <code>STRING</code> and contains at least one character, and <code>&#8221;</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns the null string <code>&#8221;</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>char</code> must be a scalar.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, &#39;&gt;&#39; + first_char(&#39;Hello World&#39;) + &#39;&lt;&#39;
+&gt;H&lt;
+
+IDL&gt; PRINT, &#39;&gt;&#39; + first_char(3.14) + &#39;&lt;&#39;
+&gt;&lt;
+
+IDL&gt; PRINT, &#39;&gt;&#39; + first_char()  + &#39;&lt;&#39;
+&gt;&lt;
+
+IDL&gt; PRINT, &#39;&gt;&#39; + first_char([&#39;Hello&#39;, &#39;World&#39;])  + &#39;&lt;&#39;
+&gt;&lt;</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+<li><p>2018&#8211;01&#8211;15: Version 1.1 &#8212; Implement optional debugging.</p></li>
+<li><p>2018&#8211;06&#8211;01: Version 1.5 &#8212; Implement new coding standards.</p></li>
+<li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Simplify the code, move it from repository <code>Utilities</code> to repository <code>Macros</code>, adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
+</ul></li>
+</ul>
 <h2>is_alphanum</h2>
 <ul>
 <li><p><strong>Purpose:</strong> This function reports whether the input positional parameter <code>arg</code> is alphanumeric or not.</p></li>
-<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code> to determine the type of the input positional parameter.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE</code> to determine the type of the input positional parameter.</p></li>
 <li><p><strong>Syntax:</strong> <code>res = is_alphanum(arg)</code></p></li>
 <li><p><strong>Positional parameters [Input/Output]:</strong></p>
 <ul>
@@ -27,24 +71,26 @@
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_alphanum(&#39;Hi&#39;)
-       1
+      1
 
-IDL&gt; PRINT, is_alphanum(1.2)
-       1
+IDL&gt; PRINT, is_alphanum([1.2, 2.3])
+      1
 
 IDL&gt; PRINT, is_alphanum(PTR_NEW(0b))
-       0
+      0
 
 IDL&gt; PRINT, is_alphanum()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_array</h2>
@@ -67,24 +113,32 @@ IDL&gt; PRINT, is_alphanum()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The compound data type <code>LIST</code> is considered an array: See the examples below.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_array([1, 2, 3])
-       1
+      1
 
 IDL&gt; PRINT, is_array([&#39;abc&#39;, &#39;def&#39;])
-       1
+      1
 
 IDL&gt; PRINT, is_array(3)
-       0
+      0
+
+IDL&gt; PRINT, is_array([3])
+      1
+
+IDL&gt; PRINT, is_array(LIST(1, &#39;2&#39;, 3D))
+      1
 
 IDL&gt; PRINT, is_array()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_byte</h2>
@@ -107,36 +161,41 @@ IDL&gt; PRINT, is_array()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>BYTE</code> variable represents an unsigned 8-bit integer number, which can take values between 0 and 255, but small integers in that range are not characterized as bytes, unless explicitly stated: the default type for integers is a 16-bit <code>INT</code>.</p></li>
-<li><p><strong>Note 3:</strong> Within the <code>ASCII</code> context, there is a direct relation between integers in the range 0 to 255 and corresponding character representations, but these are not interchangeable in <code>IDL</code>. See the following examples.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a <code>BYTE</code> variable represents an unsigned 8-bit integer number, which can take values between <code>0</code> and <code>255</code>, but small integers in that range are not characterized as bytes, unless explicitly stated: the default type for integers is a 16-bit <code>INT</code>.</p></li>
+<li><p><strong>Note 4:</strong> Within the <code>ASCII</code> context, there is a direct relation between integers in the range <code>0</code> to <code>255</code> and corresponding character representations, but these are not interchangeable in <code>IDL</code>. See the following examples.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 72B
 IDL&gt; res = is_byte(a)
 IDL&gt; PRINT, res
-       1
+      1
 
 IDL&gt; b = STRING(a)
 IDL&gt; PRINT, b
 H
 IDL&gt; res = is_byte(b)
 IDL&gt; PRINT, res
-       0
+      0
 
 IDL&gt; PRINT, BYTE(&#39;H&#39;)
   72
 IDL&gt; c = 72
 IDL&gt; res = is_byte(c)
 IDL&gt; PRINT, res
-       0
+      0
+
+IDL&gt; PRINT, is_byte([2B, 4B])
+      1
 
 IDL&gt; PRINT, is_byte()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_complex</h2>
@@ -159,30 +218,38 @@ IDL&gt; PRINT, is_byte()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a variable of type <code>COMPLEX</code> is represented as a couple of real numbers, but an array of two real numbers is not considered a complex number.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a variable of type <code>COMPLEX</code> is represented as a couple of real numbers, but an array of two real numbers is not considered a complex number.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = COMPLEX(1.0, 2.0)
 IDL&gt; res = is_complex(a)
 IDL&gt; PRINT, res
-       1
+      1
 
 IDL&gt; b = [12.3, 45.6]
 IDL&gt; res = is_complex(b)
 IDL&gt; PRINT, res
-       0
+      0
+
+IDL&gt; c = 2 * a
+IDL&gt; PRINT, c
+(      2.00000,      4.00000)
+IDL&gt; PRINT, is_complex([a, c])
+      1
 
 IDL&gt; res = is_complex(&#39;test&#39;)
 IDL&gt; PRINT, res
-       0
+      0
 
 IDL&gt; PRINT, is_complex()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_dcomplex</h2>
@@ -205,31 +272,37 @@ IDL&gt; PRINT, is_complex()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a variable of type <code>DCOMPLEX</code> is represented as a couple of double precision real numbers, but an array of two double precision real numbers is not considered a complex number.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a variable of type <code>DCOMPLEX</code> is represented as a couple of double precision real numbers, but an array of two double precision real numbers is not considered a complex number.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; c = DCOMPLEX(3.0D, 4.0D)
 IDL&gt; res = is_dcomplex(c)
 IDL&gt; PRINT, res
-       1
+      1
+
+IDL&gt; d = 2 * c
+IDL&gt; PRINT, is_dcomplex([c, d])
+      1
 
 IDL&gt; res = is_dcomplex([12.3D, 45.6D])
 IDL&gt; PRINT, res
-       0
+      0
 
 IDL&gt; PRINT, is_dcomplex()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_defined</h2>
 <ul>
 <li><p><strong>Purpose:</strong> This function reports whether the input positional parameter <code>arg</code> is defined or not.</p></li>
-<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code> to determine whether the input positional parameter <code>arg</code> is defined or not.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE</code> to determine whether the input positional parameter <code>arg</code> is defined or not.</p></li>
 <li><p><strong>Syntax:</strong> <code>res = is_defined(arg)</code></p></li>
 <li><p><strong>Positional parameters [Input/Output]:</strong></p>
 <ul>
@@ -246,25 +319,31 @@ IDL&gt; PRINT, is_dcomplex()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
-<pre><code>IDL&gt; a = [1, 2, 3]
-IDL&gt; res = is_defined(a)
-IDL&gt; PRINT, res
-       1
+<pre><code>IDL&gt; a = &#39;Hello&#39;
+IDL&gt; PRINT, is_defined(a)
+      1
 
-IDL&gt; b = !NULL
+IDL&gt; b = [1, 2, 3]
 IDL&gt; res = is_defined(b)
 IDL&gt; PRINT, res
-       0
+      1
+
+IDL&gt; c = !NULL
+IDL&gt; res = is_defined(c)
+IDL&gt; PRINT, res
+      0
 
 IDL&gt; PRINT, is_defined()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_double</h2>
@@ -287,30 +366,36 @@ IDL&gt; PRINT, is_defined()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>DOUBLE</code> variable represents a double precision floating point number, which can take values within a range that is hardware-dependent. The <code>IDL</code> function <code>MACHAR(/DOUBLE)</code> reports the extent of this range, for instance <code>[2.2E-308, 2.0E+308]</code> for a 64-bit machine, where the mantissa will feature at least 15 and no more than 16 significant digits.</p></li>
-<li><p><strong>Note 3:</strong> A <code>DCOMPLEX</code> variable is not considered of type <code>DOUBLE</code>, even though the real and the imaginary components, taken individually, are of type <code>DOUBLE</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a <code>DOUBLE</code> variable represents a double precision floating point number, which can take values within a range that is hardware-dependent. The <code>IDL</code> function <code>MACHAR(/DOUBLE)</code> reports the extent of this range, for instance <code>[2.2E-308, 2.0E+308]</code> for a 64-bit machine, where the mantissa will feature at least 15 and no more than 16 significant digits.</p></li>
+<li><p><strong>Note 4:</strong> A <code>DCOMPLEX</code> variable is not considered of type <code>DOUBLE</code>, even though the real and the imaginary components, taken individually, are of type <code>DOUBLE</code>.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 3.14159D
 IDL&gt; res = is_double(a)
 IDL&gt; PRINT, res
-       1
+      1
 
-IDL&gt; b = DCOMPLEX(12.3D, 4.56D)
-IDL&gt; res = is_double(b)
+IDL&gt; b = 2 * a
+IDL&gt; PRINT, is_double([a, b])
+      1
+
+IDL&gt; c = DCOMPLEX(12.3D, 4.56D)
+IDL&gt; res = is_double(c)
 IDL&gt; PRINT, res
-       0
-IDL&gt; res = is_double(IMAGINARY(b))
+      0
+IDL&gt; res = is_double(IMAGINARY(c))
 IDL&gt; PRINT, res
-       1
+      1
 
 IDL&gt; PRINT, is_double()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_float</h2>
@@ -333,8 +418,9 @@ IDL&gt; PRINT, is_double()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>FLOAT</code> variable represents a single precision floating point number, which can take values within a range that is hardware-dependent. The <code>IDL</code> function <code>MACHAR()</code> reports the extent of this range, for instance <code>[1.2E-38, 3.4E+38]</code> for a 64-bit machine, where the mantissa will feature at least 6 and no more than 7 significant digits.</p></li>
-<li><p><strong>Note 3:</strong> If a real number with more than 7 significant digits is assigned to a variable without specifying that it should be saved in double precision, the variable will contain a truncated representation of that number, and thus be considered of type <code>FLOAT</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a <code>FLOAT</code> variable represents a single precision floating point number, which can take values within a range that is hardware-dependent. The <code>IDL</code> function <code>MACHAR()</code> reports the extent of this range, for instance <code>[1.2E-38, 3.4E+38]</code> for a 64-bit machine, where the mantissa will feature at least 6 and no more than 7 significant digits.</p></li>
+<li><p><strong>Note 4:</strong> If a real number with more than 7 significant digits is assigned to a variable without specifying that it should be saved in double precision, the variable will contain a truncated representation of that number, and thus be considered of type <code>FLOAT</code>.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 1.23
@@ -347,14 +433,14 @@ IDL&gt; res = is_float(b)
 IDL&gt; PRINT, res
        0
 
-IDL&gt; c = 1.23456789
+IDL&gt; c = 1.2345678987
 IDL&gt; res = is_float(c)
 IDL&gt; PRINT, res
        1
 IDL&gt; PRINT, c
-      1.23457
-IDL&gt; PRINT, c, FORMAT = &#39;(F10.8)&#39;
-      1.23456788
+   1.23457
+IDL&gt; PRINT, c, FORMAT = &#39;(F12.10)&#39;
+   1.2345678806
 
 IDL&gt; PRINT, is_float()
        0</code></pre></li>
@@ -363,6 +449,7 @@ IDL&gt; PRINT, is_float()
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_int</h2>
@@ -385,9 +472,10 @@ IDL&gt; PRINT, is_float()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, an <code>INT</code> variable represents a signed 16-bit integer number, which can take values between <code>-32,768</code> and <code>+32,767</code>. Natural numbers beyond this range can be used, but should be declared as <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code> or <code>ULONG64</code>.</p></li>
-<li><p><strong>Note 3:</strong> Note the strict interpretation of the type <code>INT</code>. See the function <code>is_integer</code> for a generic test allowing any one of the <code>INTEGER</code> types.</p></li>
-<li><p><strong>Note 4:</strong> Contrary to the case of floating point numbers (see subsection <a href="#subsec:isfloat" data-reference-type="ref" data-reference="subsec:isfloat">[subsec:isfloat]</a> above), if an integer constant larger than <span class="math inline">&#8197;+&#8197;32,&#8198;767</span> is assigned to a variable, the latter becomes a <code>LONG</code> integer.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, an <code>INT</code> variable represents a signed 16-bit integer number, which can take values between <code>-32,768</code> and <code>+32,767</code>. Natural numbers beyond this range can be used, but should be declared as <code>LONG</code>, <code>ULONG</code>, <code>LONG64</code> or <code>ULONG64</code>.</p></li>
+<li><p><strong>Note 4:</strong> Note the strict interpretation of the type <code>INT</code>. See the function <code>is_integer</code> for a generic test allowing any one of the <code>INTEGER</code> types.</p></li>
+<li><p><strong>Note 5:</strong> Contrary to the case of floating point numbers (see subsection about the function <code>is_float</code> above), if an integer constant larger than <span class="math inline">&#8197;+&#8197;32,&#8198;767</span> is assigned to a variable, the latter automatically becomes a <code>LONG</code> integer.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 10
@@ -414,6 +502,7 @@ IDL&gt; PRINT, is_INT()
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_integer</h2>
@@ -436,86 +525,100 @@ IDL&gt; PRINT, is_INT()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, an <code>INT</code> variable represents a signed 16-bit integer number, which can take values between <code>-32,768</code> and <code>+32,767</code>; a <code>UINT</code> variable represents an unsigned 16-bit integer number, which can take values between <code>0</code> and <code>65,535</code>; a <code>LONG</code> variable represents an unsigned 32-bit integer number, which can take values between <code>&#8211;2,147,483,648</code> and <code>+2,147,483,647</code>; a <code>ULONG</code> variable represents an unsigned 32-bit integer number, which can take values between <code>0</code> and <code>4,294,967,295</code>; a <code>LONG64</code> variable represents an unsigned 64-bit integer number, which can take values between <code>&#8211;9,223,372,036,854,775,808</code> and <code>+9,223,372,036,854,775,807</code>; a <code>ULONG64</code> variable represents an unsigned 64-bit integer number, which can take values between <code>0</code> and <code>18,446,744,073,709,551,615</code>.</p></li>
-<li><p><strong>Note 3:</strong> Note the more permissive interpretation of type <code>INTEGER</code>, which returns a positive answer for any one of the 6 types of integer numbers allowed in <code>IDL</code>.</p></li>
-<li><p><strong>Note 4:</strong> Contrary to the case of floating point numbers, if an integer constant larger than <span class="math inline">&#8197;+&#8197;32,&#8198;767</span> is assigned to a variable, the latter becomes a <code>LONG</code> integer.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, an <code>INT</code> variable represents a signed 16-bit integer number, which can take values between <code>-32,768</code> and <code>+32,767</code>; a <code>UINT</code> variable represents an unsigned 16-bit integer number, which can take values between <code>0</code> and <code>65,535</code>; a <code>LONG</code> variable represents an unsigned 32-bit integer number, which can take values between <code>&#8211;2,147,483,648</code> and <code>+2,147,483,647</code>; a <code>ULONG</code> variable represents an unsigned 32-bit integer number, which can take values between <code>0</code> and <code>4,294,967,295</code>; a <code>LONG64</code> variable represents an unsigned 64-bit integer number, which can take values between <code>&#8211;9,223,372,036,854,775,808</code> and <code>+9,223,372,036,854,775,807</code>; a <code>ULONG64</code> variable represents an unsigned 64-bit integer number, which can take values between <code>0</code> and <code>18,446,744,073,709,551,615</code>.</p></li>
+<li><p><strong>Note 4:</strong> Note the more permissive interpretation of type <code>INTEGER</code>, which returns a positive answer for any one of the 6 types of integer numbers allowed in <code>IDL</code>.</p></li>
+<li><p><strong>Note 5:</strong> Contrary to the case of floating point numbers, if an integer constant larger than <span class="math inline">&#8197;+&#8197;32,&#8198;767</span> is assigned to a variable, the latter becomes a <code>LONG</code> integer.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 10
 IDL&gt; res = is_integer(a)
 IDL&gt; PRINT, res
-       1
+      1
 
 IDL&gt; b = 1.23
 IDL&gt; res = is_integer(b)
 IDL&gt; PRINT, res
-       0
+      0
 
 IDL&gt; c = 40000
 IDL&gt; PRINT, is_integer(c)
-       1
+      1
 IDL&gt; PRINT, is_int(c)
-       0
+      0
 IDL&gt; PRINT, is_long(c)
-       1
+      1
 
 IDL&gt; d = -9223372036854LL
 IDL&gt; res = is_integer(d)
 IDL&gt; PRINT, res
-       1
+      1
+
+IDL&gt; e = [12, 24, 40000]
+IDL&gt; PRINT, is_integer(e)
+      1
 
 IDL&gt; PRINT, is_integer()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;06&#8211;19: Version 2.01 &#8212; Update the function to return <code>1</code> when the input positional parameter <code>arg</code> is of type <code>BYTE</code>, which is often used as an 8-bit integer while generating color graphics output.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_letter</h2>
 <ul>
-<li><p><strong>Purpose:</strong> This function reports whether the (presumably single character) input positional parameter <code>char</code> is one of the 27 letters (lowercase or uppercase) of the ASCII character set or not.</p></li>
-<li><p><strong>Algorithm:</strong> This function checks whether the <code>BYTE</code> representation of <code>char</code> is within the ranges [65, 90] or [97, 122] to determine whether it corresponds to a letter.</p></li>
-<li><p><strong>Syntax:</strong> <code>rc = is_letter, char)</code></p></li>
+<li><p><strong>Purpose:</strong> This function reports whether the input positional parameter <code>arg</code> is one of the 26 letters (lowercase or uppercase) of the ASCII character set or not.</p></li>
+<li><p><strong>Algorithm:</strong> This function screens out all arguments that are not of type BYTE or STRING, as well as all STRINGs longer than a single character, and checks whether the <code>BYTE</code> representation of <code>arg</code> is within the ranges [65, 90] or [97, 122] to determine whether it corresponds to a letter.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_letter(arg)</code></p></li>
 <li><p><strong>Positional parameters [Input/Output]:</strong></p>
 <ul>
-<li><p><code>char {STRING} [I]:</code> An arbitrary 1-character long variable.</p></li>
+<li><p><code>arg [I]:</code> An arbitrary expression.</p></li>
 </ul></li>
 <li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
 <li><p><strong>Returned value type:</strong> <code>INT</code>.</p></li>
 <li><p><strong>Outcome:</strong></p>
 <ul>
-<li><p>This function returns <code>1</code> if the input positional parameter <code>char</code> is an uppercase or a lowercase letter, and <code>0</code> otherwise.</p></li>
+<li><p>This function returns <code>1</code> if the input positional parameter <code>arg</code> is a single uppercase or a lowercase letter, and <code>0</code> otherwise.</p></li>
 </ul></li>
 <li><p><strong>Exception conditions:</strong> None.</p></li>
 <li><p><strong>Dependencies:</strong> None.</p></li>
 <li><p><strong>Remarks:</strong></p>
 <ul>
-<li><p><strong>Note 1:</strong> This function does not check whether the input positional parameter is of type <code>STRING</code> and composed of a single character: If that is not the case, results may be unreliable at best, or may cause IDL to crash. See the examples below.</p></li>
+<li><p><strong>Note 1:</strong> This function returns <code>0</code> if the input positional parameter <code>arg</code> is of type <code>STRING</code> but contains more than 1 character, or is an array of any type: See the examples below.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_letter(&#39;c&#39;)
-       1
+      1
 
 IDL&gt; PRINT, is_letter(&#39;M&#39;)
-       1
+      1
 
 IDL&gt; PRINT, is_letter(&#39;$&#39;)
-       0
+      0
 
 IDL&gt; PRINT, is_letter(123)
-       0
+      0
 
 IDL&gt; PRINT, is_letter(&#39;123&#39;)
-% Expression must be a scalar or 1 element array
-   in this context: &lt;BYTE Array[3]&gt;.
-% Execution halted at: IS_LETTER...</code></pre></li>
+      0
+
+IDL&gt; PRINT, is_letter([&#39;a&#39;, &#39;b&#39;])
+      0
+
+IDL&gt; PRINT, is_letter(!NULL)
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2018&#8211;12&#8211;02: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;06&#8211;10: Version 2.01 &#8212; Update the code to handle any type of input positional argument.</p></li>
+<li><p>2019&#8211;06&#8211;19: Version 2.02 &#8212; Update the documentation to note that this function returns <code>0</code> if the input positional parameter contains more than 1 character.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_long</h2>
@@ -538,27 +641,34 @@ IDL&gt; PRINT, is_letter(&#39;123&#39;)
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>LONG</code> variable represents an unsigned 32-bit integer number, which can take values between <code>&#8211;2,147,483,648</code> and<br />
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a <code>LONG</code> variable represents an unsigned 32-bit integer number, which can take values between <code>&#8211;2,147,483,648</code> and<br />
 <code>+2,147,483,647</code></p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 123456789L
 IDL&gt; res = is_long(a)
 IDL&gt; PRINT, res
-       1
+      1
 
 IDL&gt; b = 12
 IDL&gt; res = is_long(b)
 IDL&gt; PRINT, res
-       0
+      0
+
+IDL&gt; c = [2L, 3L]
+IDL&gt; res = is_long(c)
+IDL&gt; PRINT, res
+      1
 
 IDL&gt; PRINT, is_long()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_long64</h2>
@@ -581,23 +691,71 @@ IDL&gt; PRINT, is_long()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>LONG64</code> variable represents a signed 64-bit integer number, which can take values between<br />
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a <code>LONG64</code> variable represents a signed 64-bit integer number, which can take values between<br />
 <code>&#8211;9,223,372,036,854,775,808</code> and <code>+9,223,372,036,854,775,807</code>.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_long64(123LL)
-       1
+      1
+
+IDL&gt; PRINT, is_long64([123LL, 456LL])
+      1
 
 IDL&gt; PRINT, is_long64(123456UL)
-       0
+      0
 
 IDL&gt; PRINT, is_long64()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
+</ul></li>
+</ul>
+<h2>is_lowercase</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function reports whether the input positional parameter <code>char</code> is a single lowercase character or not.</p></li>
+<li><p><strong>Algorithm:</strong> This function returns <code>1</code> if the input positional parameter <code>char</code> meets the following 4 conditions: (1) it is of type <code>STRING</code>, (2) it is a scalar, (3) it is of length <code>1</code>, and (4) its <code>BYTE</code> value lies in the range <code>[97, 122]</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_lowercase(char)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>char {STRING} [I]:</code> The single character to be tested.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INT</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if the input positional parameter is a single character set in lowercase, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>char</code> must be a scalar.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; char = &#39;a&#39;
+IDL&gt; res = is_lowercase(char)
+IDL&gt; PRINT, &#39;res = &#39;, res
+res =            1
+
+IDL&gt; char = &#39;Z&#39;
+IDL&gt; res = is_lowercase(char)
+IDL&gt; PRINT, &#39;res = &#39;, res
+res =            0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;18: Version 1.0 &#8212; Initial release.</p></li>
+<li><p>2018&#8211;01&#8211;15: Version 1.1 &#8212; Implement optional debugging.</p></li>
+<li><p>2018&#8211;06&#8211;01: Version 1.5 &#8212; Implement new coding standards.</p></li>
+<li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;06&#8211;15: Version 2.01 &#8212; Simplify the code and move this function from the repository <code>Utilities</code> to the repository <code>Macros</code>.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards (in particular regarding the assignment of numeric return codes), and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_numeric</h2>
@@ -620,34 +778,39 @@ IDL&gt; PRINT, is_long64()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; .reset
 IDL&gt; PRINT, is_numeric(zzz)
-       0
+      0
 
 IDL&gt; a = 12B
 IDL&gt; res = is_numeric(a)
 IDL&gt; PRINT, res
-       1
+      1
 
 IDL&gt; b = &#39;Hello&#39;
 IDL&gt; res = is_numeric(b)
 IDL&gt; PRINT, res
-       0
+      0
 
 IDL&gt; c = 12.3
 IDL&gt; res = is_numeric(c)
 IDL&gt; PRINT, res
-       1
+      1
+
+IDL&gt; PRINT, is_numeric([2, 3.4])
+      1
 
 IDL&gt; PRINT, is_numeric()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_numstring</h2>
@@ -670,28 +833,34 @@ IDL&gt; PRINT, is_numeric()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> This function returns <code>0</code> if the input positional parameter is an array of any type.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = &#39;123&#39;
 IDL&gt; PRINT, is_numstring(a)
-       1
+      1
 
 IDL&gt; b = &#39;2*4/3&#39;
 IDL&gt; PRINT, is_numstring(b)
-       0
+      0
 
 IDL&gt; c = &#39;-567.89&#39;
 IDL&gt; PRINT, is_numstring(c)
-       1
+      1
 
 IDL&gt; d = &#39;4x&#39;
 IDL&gt; PRINT, is_numstring(d)
-       0</code></pre></li>
+      0
+
+IDL&gt; e = [&#39;123&#39;, &#39;-567.89&#39;]
+IDL&gt; PRINT, is_numstring(e)
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2018&#8211;08&#8211;07: Version 0.9 &#8212; Initial release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_objref</h2>
@@ -714,6 +883,7 @@ IDL&gt; PRINT, is_numstring(d)
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; A = OBJARR(3, 3)
@@ -733,6 +903,7 @@ IDL&gt; PRINT, is_objref()
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_pointer</h2>
@@ -755,6 +926,7 @@ IDL&gt; PRINT, is_objref()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 12.3
@@ -775,6 +947,7 @@ IDL&gt; PRINT, is_pointer()
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_positive</h2>
@@ -797,37 +970,148 @@ IDL&gt; PRINT, is_pointer()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> This function considers complex numbers to be always positive, independently from the sign of the real and imaginary parts.</p></li>
+<li><p><strong>Note 2:</strong> This function returns <code>0</code> if the input positional parameter is an array of any type.</p></li>
+<li><p><strong>Note 3:</strong> This function considers complex numbers to be always positive, independently from the sign of the real and imaginary parts.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_positive(1234)
-       1
+      1
 
 IDL&gt; PRINT, is_positive(0.0)
-       1
+      1
 
 IDL&gt; PRINT, is_positive(-0.1E-20)
-       0
+      0
 
 IDL&gt; PRINT, is_positive(&#39;12&#39;)
-       0
+      0
 
 IDL&gt; PRINT, is_positive(COMPLEX(-1.0, 0.0))
-       1
+      1
 
 IDL&gt; PRINT, is_positive(COMPLEX(1.0, -20.0))
-       1
+      1
 
 IDL&gt; PRINT, is_positive(COMPLEX(-1.0, -20.0))
-       1
+      1
+
+IDL&gt; PRINT, is_positive([1, 2])
+      0
 
 IDL&gt; PRINT, is_positive()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
+</ul></li>
+</ul>
+<h2>is_readable_dir</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function reports whether the input positional parameter <code>fspec</code> points to a readable directory or not.</p></li>
+<li><p><strong>Algorithm:</strong> This function verifies that the input positional parameter <code>fspec</code> is of type <code>STRING</code> and if so relies on the <code>IDL</code> built-in function <code>FILE_TEST</code> to determine whether it points to a readable directory or not.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_readable_dir(fspec)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>fspec {STRING} [I]:</code> The variable to be tested.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INT</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>If the input positional parameter <code>fspec</code> is of type <code>STRING</code>, this function returns <code>1</code> if <code>fspec</code> points to a readable directory, and <code>0</code> otherwise. If <code>fspec</code> is of any other data type, this function returns <code>-1</code>.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>-1</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>fspec</code> can be a scalar or an array.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; fspec = &#39;~/Codes/IDL/Macros/is_readable_dir/&#39;
+IDL&gt; res = is_readable_dir(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = 1
+
+IDL&gt; fspec = &#39;~/Codes/IDL/Macros/is_readable_dir/is_readable_dir.pro&#39;
+IDL&gt; res = is_readable_dir(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = 0
+
+IDL&gt; fspec = 123
+IDL&gt; res = is_readable_dir(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = -1</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;07&#8211;05: Version 0.9 &#8212; Initial release under the name <code>is_readable.pro</code>.</p></li>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+<li><p>2018&#8211;01&#8211;15: Version 1.1 &#8212; Implement optional debugging.</p></li>
+<li><p>2018&#8211;04&#8211;24: Version 1.2 &#8212; Update the function to return <code>0</code> but no exception condition if the input positional parameter exists but is unreadable.</p></li>
+<li><p>2018&#8211;05&#8211;14: Version 1.3 &#8212; Add return code to indicate the input positional parameter does not exist, and update the documentation.</p></li>
+<li><p>2018&#8211;06&#8211;01: Version 1.5 &#8212; Implement new coding standards.</p></li>
+<li><p>2018&#8211;06&#8211;22: Version 1.6 &#8212; Improve diagnostic messages.</p></li>
+<li><p>2018&#8211;08&#8211;15: Version 1.7 &#8212; Return non-empty <code>excpt_cond</code> values only when errors are encountered (i.e., only when <code>res = -1</code>, and not as warning or information messages).</p></li>
+<li><p>2018&#8211;08&#8211;28: Version 1.8 &#8212; Return empty <code>excpt_cond</code> value only when <code>file_spec</code> exists and is readable.</p></li>
+<li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Simplify the code, move this function from repository <code>Utilities</code> to repository <code>Macros</code>, rename it <code>is_readable_dir.pro</code>, and adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
+</ul></li>
+</ul>
+<h2>is_readable_file</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function reports whether the input positional parameter <code>fspec</code> points to a readable file or not.</p></li>
+<li><p><strong>Algorithm:</strong> This function verifies that the input positional parameter <code>fspec</code> is of type <code>STRING</code> and if so relies on the <code>IDL</code> built-in function <code>FILE_TEST</code> to determine whether it points to a readable file or not.</p></li>
+<li><p><strong>Syntax:</strong> <code>rc = is_readable_file(fspec)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>fspec {STRING} [I]:</code> The variable to be tested.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INT</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>If the input positional parameter <code>fspec</code> is of type <code>STRING</code>, this function returns <code>1</code> if <code>fspec</code> points to a readable file, and <code>0</code> otherwise. If <code>fspec</code> is of any other data type, this function returns <code>-1</code>.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>-1</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>fspec</code> can be a scalar or an array.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; fspec = &#39;~/Codes/IDL/Macros/is_readable_file/is_readable_file.pro&#39;
+IDL&gt; rc = is_readable_file(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = 1
+
+IDL&gt; fspec = &#39;~/Desktop/&#39;
+IDL&gt; rc = is_readable_file(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = 0
+
+IDL&gt; fspec = 123
+IDL&gt; res = is_readable_file(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = -1</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;07&#8211;05: Version 0.9 &#8212; Initial release under the name <code>is_readable.pro</code>.</p></li>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+<li><p>2018&#8211;01&#8211;15: Version 1.1 &#8212; Implement optional debugging.</p></li>
+<li><p>2018&#8211;04&#8211;24: Version 1.2 &#8212; Update the function to return <code>0</code> but no exception condition if the input positional parameter exists but is unreadable.</p></li>
+<li><p>2018&#8211;05&#8211;14: Version 1.3 &#8212; Add return code to indicate the input positional parameter does not exist, and update the documentation.</p></li>
+<li><p>2018&#8211;06&#8211;01: Version 1.5 &#8212; Implement new coding standards.</p></li>
+<li><p>2018&#8211;06&#8211;22: Version 1.6 &#8212; Improve diagnostic messages.</p></li>
+<li><p>2018&#8211;08&#8211;15: Version 1.7 &#8212; Return non-empty <code>excpt_cond</code> values only when errors are encountered (i.e., only when <code>res = -1</code>, and not as warning or information messages).</p></li>
+<li><p>2018&#8211;08&#8211;28: Version 1.8 &#8212; Return empty <code>excpt_cond</code> value only when <code>file_spec</code> exists and is readable.</p></li>
+<li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Simplify the code, move this function from repository <code>Utilities</code> to repository <code>Macros</code>, rename it <code>is_readable_file.pro</code>, and adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_scalar</h2>
@@ -850,6 +1134,7 @@ IDL&gt; PRINT, is_positive()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 3.14
@@ -874,6 +1159,7 @@ IDL&gt; PRINT, is_scalar()
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_single</h2>
@@ -896,30 +1182,35 @@ IDL&gt; PRINT, is_scalar()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_single(2)
-       1
+      1
 
 IDL&gt; PRINT, is_single(5B)
-       1
+      1
 
 IDL&gt; PRINT, is_single(COMPLEX(3.5, 1.0))
-       1
+      1
 
 IDL&gt; PRINT, is_single(345LL)
-       0
+      0
 
 IDL&gt; PRINT, is_single(DOUBLE(78.0))
-       0
+      0
+
+IDL&gt; PRINT, is_single([1.2, 3.4])
+      1
 
 IDL&gt; PRINT, is_single()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_string</h2>
@@ -942,7 +1233,7 @@ IDL&gt; PRINT, is_single()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> This function works equally well for scalars and arrays.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = &#39;Hello&#39;
@@ -967,6 +1258,7 @@ IDL&gt; PRINT, is_string()
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_struct</h2>
@@ -989,15 +1281,22 @@ IDL&gt; PRINT, is_string()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = CREATE_STRUCT(&#39;A&#39;, 1, &#39;B&#39;, &#39;xxx&#39;)
 IDL&gt; res = is_struct(a)
 IDL&gt; PRINT, res
-       1
+      1
 
-IDL&gt; b = 12.3D
-IDL&gt; res = is_struct(b)
+IDL&gt; b = REPLICATE(a, 2)
+IDL&gt; HELP, b
+B     STRUCT    = -&gt; &lt;Anonymous&gt; Array[2]
+IDL&gt; PRINT, is_struct(b)
+      1
+
+IDL&gt; c = 12.3D
+IDL&gt; res = is_struct(c)
 IDL&gt; PRINT, res
        0
 
@@ -1008,6 +1307,7 @@ IDL&gt; PRINT, is_struct()
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_uint</h2>
@@ -1030,22 +1330,27 @@ IDL&gt; PRINT, is_struct()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>UINT</code> variable represents an unsigned 16-bit integer number, which can take values between <code>0</code> and <code>65,535</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a <code>UINT</code> variable represents an unsigned 16-bit integer number, which can take values between <code>0</code> and <code>65,535</code>.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_uint(123U)
-       1
+      1
 
 IDL&gt; PRINT, is_uint(123)
-       0
+      0
+
+IDL&gt; PRINT, is_uint([12U, 15U])
+      1
 
 IDL&gt; PRINT, is_uint()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_ulong</h2>
@@ -1068,22 +1373,27 @@ IDL&gt; PRINT, is_uint()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>ULONG</code> variable represents an unsigned 32-bit integer number, which can take values between <code>0</code> and <code>4,294,967,295</code></p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a <code>ULONG</code> variable represents an unsigned 32-bit integer number, which can take values between <code>0</code> and <code>4,294,967,295</code></p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, is_ulong(123456789UL)
-       1
+      1
 
 IDL&gt; PRINT, is_ulong(12L)
-       0
+      0
+
+IDL&gt; PRINT, is_ulong([12UL, 15UL])
+      1
 
 IDL&gt; PRINT, is_ulong()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>is_ulong64</h2>
@@ -1106,27 +1416,183 @@ IDL&gt; PRINT, is_ulong()
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
-<li><p><strong>Note 2:</strong> Within the <code>IDL</code> context, a <code>ULONG64</code> variable represents an unsigned 64-bit integer number, which can take values between <code>0</code> and<br />
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
+<li><p><strong>Note 3:</strong> Within the <code>IDL</code> context, a <code>ULONG64</code> variable represents an unsigned 64-bit integer number, which can take values between <code>0</code> and<br />
 <code>18,446,744,073,709,551,615</code>.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 1234567890ULL
 IDL&gt; res = is_ulong64(a)
 IDL&gt; PRINT, res
-       1
+      1
 
 IDL&gt; b = 1234567890LL
 IDL&gt; res = is_ulong64(b)
 IDL&gt; PRINT, res
-       0
+      0
+
+IDL&gt; PRINT, is_ulong64([12ULL, 15ULL])
+      1
 
 IDL&gt; PRINT, is_ulong64()
-       0</code></pre></li>
+      0</code></pre></li>
 <li><p><strong>References:</strong> None.</p></li>
 <li><p><strong>Versioning:</strong></p>
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
+</ul></li>
+</ul>
+<h2>is_uppercase</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function reports whether the input positional parameter <code>char</code> is a single uppercase character or not.</p></li>
+<li><p><strong>Algorithm:</strong> This function returns <code>1</code> if the input positional parameter <code>char</code> meets the following 4 conditions: (1) it is of type <code>STRING</code>, (2) it is a scalar, (3) it is of length <code>1</code>, and (4) its <code>BYTE</code> value lies in the range <code>[65, 90]</code>.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = is_uppercase(char)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>char {STRING} [I]:</code> The single character to be tested.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>INT</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if the input positional parameter is a single character set in uppercase, and <code>0</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>char</code> must be a scalar.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; res = is_uppercase(&#39;C&#39;)
+IDL&gt; PRINT, &#39;res = &#39;, res
+res =        1
+
+IDL&gt; res = is_uppercase(&#39;c&#39;)
+IDL&gt; PRINT, &#39;res = &#39;, res
+res =        0</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;18: Version 1.0 &#8212; Initial release.</p></li>
+<li><p>2018&#8211;01&#8211;15: Version 1.1 &#8212; Implement optional debugging.</p></li>
+<li><p>2018&#8211;06&#8211;01: Version 1.5 &#8212; Implement new coding standards.</p></li>
+<li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;06&#8211;15: Version 2.01 &#8212; Simplify the code and move this function from the repository <code>Utilities</code> to the repository <code>Macros</code>.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards (in particular regarding the assignment of numeric return codes), and switch to 3-parts version identifiers.</p></li>
+<li><p>2019&#8211;10&#8211;05: Version 2.1.1 &#8212; Documentation update.</p></li>
+</ul></li>
+</ul>
+<h2>is_writable_dir</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function reports whether the input positional parameter <code>fspec</code> points to a writable directory or not.</p></li>
+<li><p><strong>Algorithm:</strong> This function verifies that the input positional parameter <code>fspec</code> is of type <code>STRING</code> and if so relies on the <code>IDL</code> built-in function <code>FILE_TEST</code> to determine whether it points to a writable directory or not.</p></li>
+<li><p><strong>Syntax:</strong> <code>rc = is_writable_dir(fspec, CREATE = create)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>fspec {STRING} [I]:</code> The variable to be tested.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>CREATE = create {INT} [I] (Default value: 0):</code> Flag to activate (<code>1</code>) or skip (<code>0</code>) creating the folder if it does not exist.</p></li>
+</ul></li>
+<li><p><strong>Returned value type:</strong> <code>INT</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns <code>1</code> if the input positional parameter <code>fspec</code> is of type <code>STRING</code> and either points to an existing writable directory or does not pre-exist and has been created (<code>CREATE = 1</code>).</p></li>
+<li><p>This function returns <code>0</code> if the input positional parameter <code>fspec</code> is of type <code>STRING</code> and either points to an unwritable directory or does not pre-exist and its creation has not been requested (<code>CREATE = 0</code>).</p></li>
+<li><p>This function returns <code>-1</code> if the input positional parameter <code>fspec</code> is of type <code>STRING</code> and points to an existing regular file.</p></li>
+<li><p>This function returns <code>-2</code> if the input positional parameter <code>fspec</code> is not of type <code>STRING</code> or is missing.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>-2</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>fspec</code> must be a scalar.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; fspec = &#39;~/Desktop/&#39;
+IDL&gt; rc = is_writable_dir(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = 1
+
+IDL&gt; fspec = &#39;~/Desktop/qwerty123456/&#39;
+IDL&gt; rc = is_writable_dir(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = 0
+
+IDL&gt; fspec = &#39;~/Codes/IDL/Macros/is_writable_dir/is_writable_dir.pro&#39;
+IDL&gt; rc = is_writable_dir(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = -1
+
+IDL&gt; fspec = 123
+IDL&gt; rc = is_writable_dir(fspec)
+IDL&gt; PRINT, &#39;res = &#39; + strstr(res)
+res = -2</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;07&#8211;05: Version 0.9 &#8212; Initial release under the name <code>is_writable.pro</code>.</p></li>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+<li><p>2018&#8211;01&#8211;15: Version 1.1 &#8212; Implement optional debugging.</p></li>
+<li><p>2018&#8211;04&#8211;24: Version 1.2 &#8212; Update the function to return <code>0</code> but no exception condition if the input positional parameter exists but is unreadable.</p></li>
+<li><p>2018&#8211;05&#8211;14: Version 1.3 &#8212; Add return code to indicate the input positional parameter does not exist, and update the documentation.</p></li>
+<li><p>2018&#8211;06&#8211;01: Version 1.5 &#8212; Implement new coding standards.</p></li>
+<li><p>2018&#8211;06&#8211;22: Version 1.6 &#8212; Improve diagnostic messages.</p></li>
+<li><p>2018&#8211;08&#8211;15: Version 1.7 &#8212; Return non-empty <code>excpt_cond</code> values only when errors are encountered (i.e., only when <code>res = -1</code>, and not as warning or information messages).</p></li>
+<li><p>2018&#8211;08&#8211;28: Version 1.8 &#8212; Return empty <code>excpt_cond</code> value only when <code>file_spec</code> exists and is readable.</p></li>
+<li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;07&#8211;28: Version 2.01 &#8212; Rewrite the code, move this function from repository <code>Utilities</code> to repository <code>Macros</code>, rename it <code>is_writable_dir.pro</code>, and add the optional input keyword parameter <code>CREATE</code>.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards (in particular regarding the use of <code>verbose</code> and the assignment of numeric return codes), and switch to 3-parts version identifiers.</p></li>
+</ul></li>
+</ul>
+<h2>last_char</h2>
+<ul>
+<li><p><strong>Purpose:</strong> This function returns the last character of the input positional parameter <code>arg</code>.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on <code>IDL</code> built-in string functions to extract the desired character.</p></li>
+<li><p><strong>Syntax:</strong> <code>res = last_char(arg)</code></p></li>
+<li><p><strong>Positional parameters [Input/Output]:</strong></p>
+<ul>
+<li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
+</ul></li>
+<li><p><strong>Keyword parameters [Input/Output]:</strong> None.</p></li>
+<li><p><strong>Returned value type:</strong> <code>STRING</code>.</p></li>
+<li><p><strong>Outcome:</strong></p>
+<ul>
+<li><p>This function returns the last character of the input positional parameter <code>arg</code> if it is of type <code>STRING</code> and contains at least one character, and <code>&#8221;</code> otherwise.</p></li>
+</ul></li>
+<li><p><strong>Exception conditions:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Remarks:</strong></p>
+<ul>
+<li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>&#8221;</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>char</code> must be a scalar.</p></li>
+</ul></li>
+<li><p><strong>Examples:</strong></p>
+<pre><code>IDL&gt; PRINT, &#39;&gt;&#39; + last_char(&#39;Hello World&#39;) + &#39;&lt;&#39;
+&gt;d&lt;
+
+IDL&gt; PRINT, &#39;&gt;&#39; + last_char(3.14) + &#39;&lt;&#39;
+&gt;&lt;
+
+IDL&gt; PRINT, &#39;&gt;&#39; + last_char()  + &#39;&lt;&#39;
+&gt;&lt;
+
+IDL&gt; PRINT, &#39;&gt;&#39; + last_char([&#39;Hello&#39;, &#39;World&#39;])  + &#39;&lt;&#39;
+&gt;&lt;</code></pre></li>
+<li><p><strong>References:</strong> None.</p></li>
+<li><p><strong>Versioning:</strong></p>
+<ul>
+<li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
+<li><p>2018&#8211;01&#8211;15: Version 1.1 &#8212; Implement optional debugging.</p></li>
+<li><p>2018&#8211;06&#8211;01: Version 1.5 &#8212; Implement new coding standards.</p></li>
+<li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Simplify the code, move it from repository <code>Utilities</code> to repository <code>Macros</code>, adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>set_white</h2>
@@ -1178,13 +1644,14 @@ IDL&gt; FOR i = 0, n_parts-1 DO PRINT, i, &#39;   &gt;&#39; + parts[i] + &#39;&l
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 <h2>type_of</h2>
 <ul>
 <li><p><strong>Purpose:</strong> This function reports the type code and the type name of the input positional parameter <code>arg</code>.</p></li>
 <li><p><strong>Algorithm:</strong> This function relies on the <code>IDL</code> built-in function <code>SIZE()</code> to determine the type of the input positional parameter.</p></li>
-<li><p><strong>Syntax:</strong> <code>rc = type_of(arg, type_code, type_name)</code></p></li>
+<li><p><strong>Syntax:</strong> <code>res = type_of(arg, type_code, type_name)</code></p></li>
 <li><p><strong>Positional parameters [Input/Output]:</strong></p>
 <ul>
 <li><p><code>arg [I]</code>: An arbitrary expression.</p></li>
@@ -1202,22 +1669,28 @@ IDL&gt; FOR i = 0, n_parts-1 DO PRINT, i, &#39;   &gt;&#39; + parts[i] + &#39;&l
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns <code>0</code>.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> can be a scalar or an array.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; a = 36B
-IDL&gt; rc = type_of(a, type_code, type_name)
+IDL&gt; res = type_of(a, type_code, type_name)
 IDL&gt; PRINT, type_code, &#39;   &#39;, type_name
-           1   BYTE
+         1   BYTE
 
 IDL&gt; b = 987.32
-IDL&gt; rc = type_of(b, type_code, type_name)
+IDL&gt; res = type_of(b, type_code, type_name)
 IDL&gt; PRINT, type_code, &#39;   &#39;, type_name
-           4   FLOAT
+         4   FLOAT
 
 IDL&gt; c = &#39;Hello World!&#39;
-IDL&gt; rc = type_of(c, type_code, type_name)
+IDL&gt; res = type_of(c, type_code, type_name)
 IDL&gt; PRINT, type_code, &#39;   &#39;, type_name
-           7   STRING
+         7   STRING
+
+IDL&gt; d = [2.3D, 4.5D]
+IDL&gt; res = type_of(d, type_code, type_name)
+IDL&gt; PRINT, type_code, &#39;   &#39;, type_name
+         5   DOUBLE
 
 IDL&gt; PRINT, type_of()
        0</code></pre></li>
@@ -1226,6 +1699,7 @@ IDL&gt; PRINT, type_of()
 <ul>
 <li><p>2017&#8211;11&#8211;20: Version 1.0 &#8212; Initial public release.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
+<li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
 </ul></li>
 </ul>
 </body>

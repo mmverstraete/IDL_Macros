@@ -31,19 +31,28 @@ FUNCTION is_array, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
+   ;  *   NOTE 2: The compound data type LIST is considered an array: See
+   ;      the examples below.
+   ;
    ;  EXAMPLES:
    ;
    ;      IDL> PRINT, is_array([1, 2, 3])
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_array(['abc', 'def'])
-   ;             1
+   ;            1
    ;
    ;      IDL> PRINT, is_array(3)
-   ;             0
+   ;            0
+   ;
+   ;      IDL> PRINT, is_array([3])
+   ;            1
+   ;
+   ;      IDL> PRINT, is_array(LIST(1, '2', 3D))
+   ;            1
    ;
    ;      IDL> PRINT, is_array()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -53,6 +62,10 @@ FUNCTION is_array, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

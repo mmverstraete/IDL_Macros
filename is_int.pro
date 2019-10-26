@@ -30,19 +30,22 @@ FUNCTION is_int, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, an INT variable represents a
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, an INT variable represents a
    ;      signed 16-bit integer number, which can take values between
    ;      -32,768 and +32,767. Natural numbers beyond this range can be
    ;      used, but should be declared as LONG, ULONG, LONG64 or ULONG64.
    ;
-   ;  *   NOTE 3: Note the strict interpretation of the type INT. See the
+   ;  *   NOTE 4: Note the strict interpretation of the type INT. See the
    ;      function is_integer for a generic test allowing any one of the
    ;      INTEGER types.
    ;
-   ;  *   NOTE 4: Contrary to the case of floating point numbers (see
-   ;      subsection [subsec:isfloat] above), if an integer constant
-   ;      larger than  + 32, 767 is assigned to a variable, the latter
-   ;      becomes a LONG integer.
+   ;  *   NOTE 5: Contrary to the case of floating point numbers (see
+   ;      subsection about the function is_float above), if an integer
+   ;      constant larger than  + 32, 767 is assigned to a variable, the
+   ;      latter automatically becomes a LONG integer.
    ;
    ;  EXAMPLES:
    ;
@@ -74,6 +77,10 @@ FUNCTION is_int, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

@@ -31,7 +31,10 @@ FUNCTION is_ulong64, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
-   ;  *   NOTE 2: Within the IDL context, a ULONG64 variable represents an
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
+   ;  *   NOTE 3: Within the IDL context, a ULONG64 variable represents an
    ;      unsigned 64-bit integer number, which can take values between 0
    ;      and
    ;      18,446,744,073,709,551,615.
@@ -41,15 +44,18 @@ FUNCTION is_ulong64, arg
    ;      IDL> a = 1234567890ULL
    ;      IDL> res = is_ulong64(a)
    ;      IDL> PRINT, res
-   ;             1
+   ;            1
    ;
    ;      IDL> b = 1234567890LL
    ;      IDL> res = is_ulong64(b)
    ;      IDL> PRINT, res
-   ;             0
+   ;            0
+   ;
+   ;      IDL> PRINT, is_ulong64([12ULL, 15ULL])
+   ;            1
    ;
    ;      IDL> PRINT, is_ulong64()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -59,6 +65,10 @@ FUNCTION is_ulong64, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

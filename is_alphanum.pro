@@ -4,8 +4,8 @@ FUNCTION is_alphanum, arg
    ;  PURPOSE: This function reports whether the input positional
    ;  parameter arg is alphanumeric or not.
    ;
-   ;  ALGORITHM: This function relies on the IDL built-in function SIZE()
-   ;  to determine the type of the input positional parameter.
+   ;  ALGORITHM: This function relies on the IDL built-in function SIZE to
+   ;  determine the type of the input positional parameter.
    ;
    ;  SYNTAX: res = is_alphanum(arg)
    ;
@@ -33,19 +33,22 @@ FUNCTION is_alphanum, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
+   ;  *   NOTE 2: The input positional parameter arg can be a scalar or an
+   ;      array.
+   ;
    ;  EXAMPLES:
    ;
    ;      IDL> PRINT, is_alphanum('Hi')
-   ;             1
+   ;            1
    ;
-   ;      IDL> PRINT, is_alphanum(1.2)
-   ;             1
+   ;      IDL> PRINT, is_alphanum([1.2, 2.3])
+   ;            1
    ;
    ;      IDL> PRINT, is_alphanum(PTR_NEW(0b))
-   ;             0
+   ;            0
    ;
    ;      IDL> PRINT, is_alphanum()
-   ;             0
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -55,6 +58,10 @@ FUNCTION is_alphanum, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

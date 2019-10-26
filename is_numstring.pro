@@ -35,23 +35,30 @@ FUNCTION is_numstring, arg
    ;  *   NOTE 1: This function accepts any type of input positional
    ;      parameter, including none at all, in which case it returns 0.
    ;
+   ;  *   NOTE 2: This function returns 0 if the input positional
+   ;      parameter is an array of any type.
+   ;
    ;  EXAMPLES:
    ;
    ;      IDL> a = '123'
    ;      IDL> PRINT, is_numstring(a)
-   ;             1
+   ;            1
    ;
    ;      IDL> b = '2*4/3'
    ;      IDL> PRINT, is_numstring(b)
-   ;             0
+   ;            0
    ;
    ;      IDL> c = '-567.89'
    ;      IDL> PRINT, is_numstring(c)
-   ;             1
+   ;            1
    ;
    ;      IDL> d = '4x'
    ;      IDL> PRINT, is_numstring(d)
-   ;             0
+   ;            0
+   ;
+   ;      IDL> e = ['123', '-567.89']
+   ;      IDL> PRINT, is_numstring(e)
+   ;            0
    ;
    ;  REFERENCES: None.
    ;
@@ -61,6 +68,10 @@ FUNCTION is_numstring, arg
    ;
    ;  *   2019–01–28: Version 2.00 — Systematic update of all routines to
    ;      implement stricter coding standards and improve documentation.
+   ;
+   ;  *   2019–08–20: Version 2.1.0 — Adopt revised coding and
+   ;      documentation standards, and switch to 3-parts version
+   ;      identifiers.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
@@ -104,6 +115,7 @@ FUNCTION is_numstring, arg
 
    ;  Assess whether the input positional parameter 'arg' contains only digits,
    ;  arithmetic signs or the decimal point:
+   IF (is_array(arg)) THEN RETURN, 0
    IF (SIZE(arg, /TYPE) EQ 7) THEN BEGIN
       arglen = STRLEN(arg)
       FOR i = 0, arglen - 1 DO BEGIN
