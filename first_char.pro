@@ -1,11 +1,11 @@
 FUNCTION first_char, arg
 
    ;Sec-Doc
-   ;  PURPOSE: This function returns the first character of the input
-   ;  positional parameter arg.
+   ;  PURPOSE: This function returns the first character of the scalar
+   ;  input positional parameter arg.
    ;
-   ;  ALGORITHM: This function relies on IDL built-in string functions to
-   ;  extract the desired character.
+   ;  ALGORITHM: This function relies on IDL functions is_scalar and
+   ;  is_string to extract the desired character.
    ;
    ;  SYNTAX: res = first_char(arg)
    ;
@@ -25,7 +25,11 @@ FUNCTION first_char, arg
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
-   ;  DEPENDENCIES: None.
+   ;  DEPENDENCIES:
+   ;
+   ;  *   is_scalar.pro
+   ;
+   ;  *   is_string.pro
    ;
    ;  REMARKS:
    ;
@@ -33,7 +37,7 @@ FUNCTION first_char, arg
    ;      parameter, including none at all, in which case it returns the
    ;      null string ”.
    ;
-   ;  *   NOTE 2: The input positional parameter char must be a scalar.
+   ;  *   NOTE 2: The input positional parameter arg must be a scalar.
    ;
    ;  EXAMPLES:
    ;
@@ -66,6 +70,8 @@ FUNCTION first_char, arg
    ;      repository Utilities to repository Macros, adopt revised coding
    ;      and documentation standards, and switch to 3-parts version
    ;      identifiers.
+   ;
+   ;  *   2020–01–03: Version 2.1.1 — Update the documentation.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;

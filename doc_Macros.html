@@ -9,8 +9,8 @@
 <h1>Documentation for the IDL routines in project Macros</h1>
 <h2>first_char</h2>
 <ul>
-<li><p><strong>Purpose:</strong> This function returns the first character of the input positional parameter <code>arg</code>.</p></li>
-<li><p><strong>Algorithm:</strong> This function relies on <code>IDL</code> built-in string functions to extract the desired character.</p></li>
+<li><p><strong>Purpose:</strong> This function returns the first character of the scalar input positional parameter <code>arg</code>.</p></li>
+<li><p><strong>Algorithm:</strong> This function relies on <code>IDL</code> functions <code>is_scalar</code> and <code>is_string</code> to extract the desired character.</p></li>
 <li><p><strong>Syntax:</strong> <code>res = first_char(arg)</code></p></li>
 <li><p><strong>Positional parameters [Input/Output]:</strong></p>
 <ul>
@@ -23,11 +23,15 @@
 <li><p>This function returns the first character of the input positional parameter <code>arg</code> if it is of type <code>STRING</code> and contains at least one character, and <code>&#8221;</code> otherwise.</p></li>
 </ul></li>
 <li><p><strong>Exception conditions:</strong> None.</p></li>
-<li><p><strong>Dependencies:</strong> None.</p></li>
+<li><p><strong>Dependencies:</strong></p>
+<ul>
+<li><p><code>is_scalar.pro</code></p></li>
+<li><p><code>is_string.pro</code></p></li>
+</ul></li>
 <li><p><strong>Remarks:</strong></p>
 <ul>
 <li><p><strong>Note 1:</strong> This function accepts any type of input positional parameter, including none at all, in which case it returns the null string <code>&#8221;</code>.</p></li>
-<li><p><strong>Note 2:</strong> The input positional parameter <code>char</code> must be a scalar.</p></li>
+<li><p><strong>Note 2:</strong> The input positional parameter <code>arg</code> must be a scalar.</p></li>
 </ul></li>
 <li><p><strong>Examples:</strong></p>
 <pre><code>IDL&gt; PRINT, &#39;&gt;&#39; + first_char(&#39;Hello World&#39;) + &#39;&lt;&#39;
@@ -49,6 +53,7 @@ IDL&gt; PRINT, &#39;&gt;&#39; + first_char([&#39;Hello&#39;, &#39;World&#39;])  
 <li><p>2018&#8211;06&#8211;01: Version 1.5 &#8212; Implement new coding standards.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
 <li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Simplify the code, move it from repository <code>Utilities</code> to repository <code>Macros</code>, adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
+<li><p>2020&#8211;01&#8211;03: Version 2.1.1 &#8212; Update the documentation.</p></li>
 </ul></li>
 </ul>
 <h2>is_alphanum</h2>
@@ -1074,7 +1079,7 @@ res = -1</code></pre></li>
 <li><p><strong>Returned value type:</strong> <code>INT</code>.</p></li>
 <li><p><strong>Outcome:</strong></p>
 <ul>
-<li><p>If the input positional parameter <code>fspec</code> is of type <code>STRING</code>, this function returns <code>1</code> if <code>fspec</code> points to a readable file, and <code>0</code> otherwise. If <code>fspec</code> is of any other data type, this function returns <code>-1</code>.</p></li>
+<li><p>If the input positional parameter <code>fspec</code> is of type <code>STRING</code>, this function returns <code>1</code> if <code>fspec</code> points to a readable file, and <code>0</code> otherwise. If <code>fspec</code> is of any other data type, or is undefined, this function returns <code>-1</code>.</p></li>
 </ul></li>
 <li><p><strong>Exception conditions:</strong> None.</p></li>
 <li><p><strong>Dependencies:</strong> None.</p></li>
@@ -1112,6 +1117,7 @@ res = -1</code></pre></li>
 <li><p>2018&#8211;08&#8211;28: Version 1.8 &#8212; Return empty <code>excpt_cond</code> value only when <code>file_spec</code> exists and is readable.</p></li>
 <li><p>2019&#8211;01&#8211;28: Version 2.00 &#8212; Systematic update of all routines to implement stricter coding standards and improve documentation.</p></li>
 <li><p>2019&#8211;08&#8211;20: Version 2.1.0 &#8212; Simplify the code, move this function from repository <code>Utilities</code> to repository <code>Macros</code>, rename it <code>is_readable_file.pro</code>, and adopt revised coding and documentation standards, and switch to 3-parts version identifiers.</p></li>
+<li><p>2020&#8211;01&#8211;03: Version 2.1.1 &#8212; Upgrade the code to handle a missing argument and update documentation.</p></li>
 </ul></li>
 </ul>
 <h2>is_scalar</h2>

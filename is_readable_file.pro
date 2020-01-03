@@ -23,8 +23,8 @@ FUNCTION is_readable_file, fspec
    ;
    ;  *   If the input positional parameter fspec is of type STRING, this
    ;      function returns 1 if fspec points to a readable file, and 0
-   ;      otherwise. If fspec is of any other data type, this function
-   ;      returns -1.
+   ;      otherwise. If fspec is of any other data type, or is undefined,
+   ;      this function returns -1.
    ;
    ;  EXCEPTION CONDITIONS: None.
    ;
@@ -93,6 +93,9 @@ FUNCTION is_readable_file, fspec
    ;      it is_readable_file.pro, and adopt revised coding and
    ;      documentation standards, and switch to 3-parts version
    ;      identifiers.
+   ;
+   ;  *   2020–01–03: Version 2.1.1 — Upgrade the code to handle a missing
+   ;      argument and update documentation.
    ;Sec-Lic
    ;  INTELLECTUAL PROPERTY RIGHTS
    ;
@@ -136,9 +139,11 @@ FUNCTION is_readable_file, fspec
 
    ;  Verify that the input positional parameter fspec is of type STRING and
    ;  points to a readable file:
-   IF (is_string(fspec) EQ 1) THEN BEGIN
-      res = FILE_TEST(fspec, /REGULAR, /READ)
-      IF (res EQ 1) THEN RETURN, 1 ELSE RETURN, 0
+   IF (N_PARAMS() EQ 1) THEN BEGIN
+      IF (is_string(fspec) EQ 1) THEN BEGIN
+         res = FILE_TEST(fspec, /REGULAR, /READ)
+         IF (res EQ 1) THEN RETURN, 1 ELSE RETURN, 0
+      ENDIF ELSE RETURN, -1
    ENDIF ELSE RETURN, -1
 
 END
